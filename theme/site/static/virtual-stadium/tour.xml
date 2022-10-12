@@ -1,0 +1,406 @@
+﻿<krpano version="1.19" title="Virtual Tour">
+
+	<include url="skin/vtourskin.xml"  />
+	<!--<include url="plugins/videospot_editor_31052017.xml" />-->
+
+	<!-- autorotate -->
+	<autorotate enabled="false" waittime="0" accel="10" speed="3" horizon="0" tofov="90" />
+
+	<!-- Splash -->
+
+	<layer name="startpic_container" preload="true" alpha="1"
+		   handcursor="true" enabled="false" children="true" visible="true"
+		   zorder="90" type="container" maskchildren="true"
+		   keep="true" width="100%" height="100%" bgcolor="0xffffff" bgalpha="0.9">
+
+		<layer name="skin_title_logo3" zorder="100" keep="true"
+			   x="0" y="-80" align="center" url="skin/logo.png"
+			   scale="0.5" alpha="0" onloaded="tween(alpha,1.0);tween(layer[skin_title_pr].alpha,1.0);"
+			   onclick="tween(layer[startpic_container].ox,-2500,1);
+		delayedcall(2,set(layer[startpic_container].enabled,false);
+		set(layer[startpic_container].visible,false);
+		stopdelayedcall(startpic1);stopdelayedcall(startpic2);" enabled="false" />
+
+		<layer name="skin_title_pr" background="true" backgroundcolor="0x999999" roundedge="10"
+			   backgroundalpha="0" border="true" bordercolor="0x999999" borderalpha="0" borderwidth="4.0"
+			   glow="0" glowcolor="0xCCCCCC" visible="true" keep="true" alpha="0" onloaded=""
+			   children="false" align="center" zorder="100" autowidth="auto" height="40"
+			   url = "% SWFPATH% / plugins / textfield.swf" html = ""
+			   css="text-align:center; color:#9B8179; font-family:SimHei; font-weight:bold; font-size:32px;"
+			   x="0" y="150" onclick="tween(layer[startpic_container].ox,-2500,1);
+		delayedcall(2,set(layer[startpic_container].enabled,false);
+		set(layer[startpic_container].visible,false);
+		stopdelayedcall(startpic1);stopdelayedcall(startpic2);" enabled="false" /></layer>
+	<events name="startlogoevents" keep="true" onloadcomplete="ifnot(layer[skin_title_logo3].enabled,
+	set(layer[skin_title_logo3].enabled,true);
+	set(layer[skin_title_pr].enabled,true);	
+	delayedcall(startpic1,1,tween(layer[startpic_container].ox,-2500,1));
+	delayedcall(startpic2,5,set(layer[startpic_container].enabled,false);set(layer[startpic_container].visible,false));)"/>
+
+
+
+	<!-- Skin Setting -->
+	<skin_settings thumbs_scrollindicator="true"
+				   layout_width="100%"
+				   layout_maxwidth="550"
+				   xcontrolbar_width="-44"
+				   controlbar_width="-20"
+				   controlbar_height="36"
+				   controlbar_offset.normal="40"
+				   controlbar_offset.mobile="12"
+				   controlbar_offset_closed="-40"
+				   controlbar_overlap="10"
+				   design_skin_images="vtourskin_light.png"
+				   design_bgcolor="0x880000"
+				   design_bgalpha="0.9"
+				   design_bgborder="2 0x880000 0.1"
+				   design_bgroundedge="4"
+				   design_bgshadow="0"
+				   design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+				   design_thumbborder_padding="2"
+				   design_thumbborder_bgroundedge="1"
+				   design_text_css="color:#FFFFFF; font-family:Trebuchet Ms;margin:5px 20px;font-size:12px!important"
+				   design_text_shadow="0"
+	/>
+
+	<layer name="skin_btn_hide" style="skin_base|skin_glow" crop="0|448|64|64" align="right" x="50" y="0" scale="0.5" onclick="skin_hideskin()" onloaded="skin_hideskin()" />
+
+	<!-- startup action - load the first scene -->
+	<action name="hideskin" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+		layer[unittypeselect].selectItem(3 Bedrooms Corner);
+		set(layer[soundbuttonpause].visible, false);
+		set(layer[soundbuttonresume].visible, false);
+	</action>
+
+	<!-- startup action - load the first scene -->
+	<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+		layer[unittypeselect].selectItem(3 Bedrooms Corner);
+		set(layer[soundbuttonpause].visible, false);
+		set(layer[soundbuttonresume].visible, false);
+
+		skin_hideskin();
+	</action>
+
+	<!-- the logo -->
+	<layer name="logo" url="skin/logo.png" keep="true" handcursor="false" capture="false"
+		   align="leftbottom" x="20" y="20" onover="tween(alpha,1)" onout="tween(alpha,0.75)"
+		   alpha="0.8" scale="0.2" scalechildren="true"
+		   onclick=""
+	/>
+
+	<layer name="skin1" style="webvr_button_style" html="Flat Skin (Default)"     align="lefttop" y="0"   onclick="change_skin_design('default');"     />
+	<!-- the logo -->
+	<layer name="menu1" keep="true" handcursor="false" capture="false"
+		   align="rightbottom" x="20" y="20" alpha="1" scale="1"  html="Test"
+		   onclick=""
+	/>
+
+	<layer name="mytext"
+		   type="text"
+		   align="righttop" x="10" y="10"
+		   html="Text...[br][b]Bold Text...[/b]"
+		   css="font-family:Arial; font-size:16px; color:#000000;"
+		   autowidth="auto"
+		   autoheight="auto"
+		   vcenter="false"
+		   padding="2"
+		   wordwrap="true"
+		   bg="true"
+		   bgcolor="0xFFFFFF"
+		   bgalpha="1.0"
+		   bgborder="0"
+		   bgroundedge="0"
+		   bgshadow=""
+		   txtshadow=""
+		   mergedalpha="true"
+		   interactivecontent="false"
+		   onautosized=""
+	/>
+
+
+
+	<layer name="skin_selector" keep="true" type="container" align="lefttop" x="0" y="0" width="300" height="100">
+		<layer name="skin2" style="webvr_button_style" html="LOBBY" align="lefttop" y="20" x="10"  onclick="loadscene(scene_2, null, MERGE, BLEND(0.5));"  />
+		<layer name="skin4" style="webvr_button_style" html="STADIUM" align="lefttop" y="20" x="90" onclick="loadscene(scene_1, null, MERGE, BLEND(0.5));" />
+
+	</layer>
+
+	<!-- Landscape -->
+	<!--
+	<layer name="landscape" url="skin/landscape.png" keep="true" handcursor="false" capture="false"
+	       align="center" x="0" y="-125" onover="" onout=""
+	       alpha="0.7" scale="0.8" scalechildren="true" 
+	       onclick="tween(alpha,0)"
+	       />
+	<action name="hidelandscape">	
+		set(layer[landscape].visible, false);
+	</action>
+
+	<action name="showlandscape">	
+		set(layer[landscape].visible, true);
+	</action>-->
+
+	<!-- hot spot animation -->
+	<action name="do_crop_animation" scope="local" args="framewidth, frameheight, framerate">
+		<!-- define local variables -->
+		calc(local.xframes, (caller.imagewidth /framewidth) BOR 0);
+		calc(local.frames, xframes * ((caller.imageheight / frameheight) BOR 0));
+		def(local.frame, integer, 0);
+
+		<!-- set the first frame -->
+		calc(caller.crop, '0|0|' + framewidth + '|' + frameheight);
+
+		<!-- do the animation -->
+		setinterval(calc('crop_anim_' + caller.name), calc(1.0 / framerate),
+		if(caller.loaded,
+		inc(frame);
+		if(frame GE frames, if(caller.onlastframe !== null, callwith(caller, onlastframe() ) ); set(frame,0); );
+		mod(xpos, frame, xframes);
+		div(ypos, frame, xframes);
+		Math.floor(ypos);
+		mul(xpos, framewidth);
+		mul(ypos, frameheight);
+		calc(caller.crop, xpos + '|' + ypos + '|' + framewidth + '|' + frameheight);
+		,
+		<!-- stop the interval when the hotspot gets removed -->
+		clearinterval(calc('crop_anim_' + caller.name));
+		);
+		);
+	</action>
+
+	<!-- IFRAME -->
+	<action name="add_iframe" type="Javascript">
+		var iframe = document.createElement("iframe");
+		iframe.style.position = "absolute";
+		iframe.style.left = 0;
+		iframe.style.top = 0;
+		iframe.style.width = "100%";
+		iframe.style.height = "100%";
+		iframe.style.border = 0;
+		iframe.src = args[1];
+		caller.registercontentsize(args[2], args[3]);
+		caller.sprite.appendChild(iframe);
+	</action>
+
+
+	<!-- load the soundinterface plugin -->
+
+
+	<plugin name="soundinterface"
+			url.flash="%SWFPATH%/plugins/soundinterface.swf"
+			url.html5="%SWFPATH%/plugins/soundinterface.js"
+			rootpath=""
+			preload="true"
+			keep="true"
+			mute="false"
+
+	/>
+
+	<action name="playbacksound">
+		set(layer[soundbuttonplay].visible, false);
+		set(layer[soundbuttonpause].visible, true);
+		set(layer[soundbuttonresume].visible, false);
+		playsound(bgsnd, 'audios/sound.mp32
+		.', 0, true);
+	</action>
+
+	<action name="pausebacksound">
+		pausesound(bgsnd);
+		set(layer[soundbuttonplay].visible, false);
+		set(layer[soundbuttonpause].visible, false);
+		set(layer[soundbuttonresume].visible, true);
+	</action>
+
+	<action name="resumebacksound">
+		resumesound(bgsnd);
+		set(layer[soundbuttonplay].visible, false);
+		set(layer[soundbuttonpause].visible, true);
+		set(layer[soundbuttonresume].visible, false);
+	</action>
+
+	<action name="preloadsound">
+		preloadsound(bgsnd, 'audios/sound.mp32', 0, true);
+	</action>
+
+	<layer name="soundbuttonpause" keep="true" align="righttop" x="40" y="10" url="skin/soundonoff.png" crop="0|0|50|50"
+		   alpha="0.5" scale="0.5" onover="tween(alpha,1)" onout="tween(alpha,0.25)"
+		   onclick="pausebacksound();"
+	/>
+
+	<layer name="soundbuttonresume" keep="true" align="righttop" x="40" y="10" url="skin/soundonoff.png"
+		   crop="0|50|50|50" alpha="0.5" scale="0.5" onover="tween(alpha,1)" onout="tween(alpha,0.25)"
+		   onclick="resumebacksound();"
+	/>
+
+	<layer name="soundbuttonplay" keep="true" align="righttop" x="40" y="10" url="skin/soundonoff.png"
+		   crop="0|50|50|50" alpha="0.5" scale="0.5" onover="tween(alpha,1)" onout="tween(alpha,0.25)"
+		   onclick="playbacksound();"
+	/>
+
+
+	<scene name="scene_1" title="1" onstart="" thumburl="panos/1.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/1.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="1280" tiledimageheight="1280">
+				<cube url="panos/1.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="640" tiledimageheight="640">
+				<cube url="panos/1.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+		<hotspot name="spot1" url="skin/neutral_.png" onloaded="do_crop_animation(50,50.01, 60);" style="skin_hotspotstyle" ath="180" atv="-25" linkedscene="scene_2" />
+
+		<hotspot name="sponsor1"
+				 url="skin/black.png"
+				 ath="0" atv="-7.5" rx="-7.5" ry="0.0" rz="0.0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=1', 400, 185));"
+		/>
+
+
+
+		<hotspot name="sponsor2"
+				 url="skin/black.png"
+				 ath="41.5" atv="-2.3" rx="-2.3" ry="41.5" rz="-0.2"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=2', 76, 48));"
+		/>
+
+		<hotspot name="sponsor3"
+				 url="skin/black.png"
+				 ath="50.5" atv="-2.7" rx="-1" ry="45" rz="-0.8"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=3', 113, 57));"
+		/>
+
+		<hotspot name="sponsor4"
+				 url="skin/black.png"
+				 ath="-41.5" atv="-2.3" rx="-1" ry="-41.5" rz="1"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=4', 76, 48));"
+		/>
+
+		<hotspot name="sponsor5"
+				 url="skin/black.png"
+				 ath="-50.5" atv="-2.7" rx="-1" ry="-45" rz="0.8"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=5', 113, 57));"
+		/>
+
+		<hotspot name="sponsor6"
+				 url="skin/black.png"
+				 ath="-124.8" atv="-32" rx="-32" ry="-55.2" rz="0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=6',405,215));"
+		/>
+
+		<hotspot name="sponsor7"
+				 url="skin/black.png"
+				 ath="-235.2" atv="-32" rx="-32" ry="55.2" rz="0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=7',405,215));"
+		/>
+
+		<hotspot name="sponsor8"
+				 url="skin/black.png"
+				 ath="0" atv="17" rx="17" ry="0" rz="0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=8',280,44));"
+		/>
+
+		<hotspot name="sponsor14"
+				 url="skin/black.png"
+				 ath="-33" atv="17" rx="17" ry="33" rz="0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=14',236,38));"
+		/>
+
+		<hotspot name="sponsor15"
+				 url="skin/black.png"
+				 ath="33.3" atv="17" rx="17" ry="-33.3" rz="0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=15',236,38));"
+		/>
+
+
+
+
+	</scene>
+
+	<scene name="scene_2" title="2" onstart="" thumburl="panos/2.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/2.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512">
+			<level tiledimagewidth="640" tiledimageheight="640">
+				<cube url="panos/2.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<hotspot name="spot1" url="skin/neutral.png" onloaded="do_crop_animation(50,50.01, 60);" style="skin_hotspotstyle" ath="26.270" atv="0.196" linkedscene="scene_1" />
+		<hotspot name="spot2" url="skin/neutral.png" onloaded="do_crop_animation(50,50.01, 60);" style="skin_hotspotstyle" ath="50.744" atv="0.885" onclick="openurl(https://www.tokopedia.com/,_blank);" />
+		<hotspot name="spot3" url="skin/neutral_.png" onloaded="do_crop_animation(50,50.01, 60);" style="skin_hotspotstyle" ath="79.149" atv="1.384" onclick="openurl(https://www.shopee.com/,_blank);" />
+		<hotspot name="spot4" url="skin/neutral_.png" onloaded="do_crop_animation(50,50.01, 60);" style="skin_hotspotstyle" ath="-69.473" atv="0.448" onclick="openurl(https://www.instagram.com/ifel.id/?hl=en,_blank);" />
+
+		<hotspot name="sponsor1"
+				 url="skin/black.png"
+				 ath="-31.100" atv="0.200" rx="0.2" ry="31.1" rz="0.0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=9', 650, 170));"
+		/>
+		<hotspot name="sponsor2"
+				 url="skin/black.png"
+				 ath="65.400" atv="0.200" rx="0.2" ry="24.6	" rz="0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=10', 105, 175));"
+		/>
+		<hotspot name="sponsor3"
+				 url="skin/black.png"
+				 ath="101.000" atv="0.200" rx="0.2" ry="-11" rz="0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=11', 110, 190));"
+		/>
+		<hotspot name="sponsor4"
+				 url="skin/black.png"
+				 ath="-83.1" atv="0.1" rx="0.1" ry="-7" rz="0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=12', 83, 144));"
+		/>
+		<hotspot name="sponsor5"
+				 url="skin/black.png"
+				 ath="-96.400" atv="0.100" rx="0.1" ry="6.4" rz="0"
+				 distorted="true"
+				 renderer="css3d"
+				 onloaded="delayedcall(0,add_iframe('http://atlasreality.co.id/custom/ifel.php?s=13', 64, 108));"
+		/>
+
+	</scene>
+
+
+</krpano>

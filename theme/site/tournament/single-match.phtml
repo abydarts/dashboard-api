@@ -1,0 +1,72 @@
+<main class="single-community">
+    <?php if(isset($tournament->banner) && $tournament->banner != null):?>
+        <section class="">
+            <div><a href="" target="_blank"><img class="w-100 h-100" src="<?=$tournament->banner?>"></a></div>
+        </section>
+    <?php endif;?>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <?= $this->partial('tournament/single-detail') ?>
+                <div class="col-12 col-lg-6">
+
+                    <?= $this->partial('tournament/single-sticky-menu') ?>
+
+                    <div class="mc-col">
+                        <div class="mc-title border-0 m-0">
+                            <h2 style="flex-basis: 0;">Pertandingan</h2>
+<!--                            <div class="dropdown">-->
+<!--                                <span class="text-secondary">Sort by:</span>-->
+<!--                                <a href="#" class="btn-auth dropdown-toggle text-secondary btn-link" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                                    Quarter-->
+<!--                                </a>-->
+<!--                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">-->
+<!--                                    <li><a class="dropdown-item" href="#">Best of 64</a></li>-->
+<!--                                    <li><a class="dropdown-item" href="#">Best of 32</a></li>-->
+<!--                                    <li><a class="dropdown-item" href="#">Best of 16</a></li>-->
+<!--                                    <li><a class="dropdown-item" href="#">Quarter</a></li>-->
+<!--                                    <li><a class="dropdown-item" href="#">Semi Final</a></li>-->
+<!--                                    <li><a class="dropdown-item" href="#">3rd 4th</a></li>-->
+<!--                                    <li><a class="dropdown-item" href="#">Final</a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="row mb-4">
+                            <?php if(count($matches) < 1) :?>
+                            <div class="mc-tree mb-5">
+                                <div class="text-center"><small>Coming soon...</small></div>
+                            </div>
+                            <?php else :?>
+                            <?php foreach($matches as $match):?>
+                            <div class="col-12 mb-2">
+                                <div class="mc-card text-secondary match-list">
+
+                                    <?php if(isset($match->result) && $match->result !== null) :?>
+                                        <small class="status">Selesai</small>
+                                    <?php else:?>
+                                        <small class="status"><?= date('d M Y H:i', strtotime($match->match_date) ); ?></small>
+                                    <?php endif;?>
+                                    <div class="cl-left">
+                                        <span class="lm-name"><span class="d-none d-lg-block"><?= $match->home->name?></span><span class="d-block d-lg-none"><?= $match->home->name?></span></span>
+                                        <span><img src="<?=(empty($match->home->flag) ? $this->asset('/img/post/image-thumbnail.jpg') : $match->home->flag)?>" width="40px" class="align-middle mx-2"></span>
+                                    </div>
+                                    <?php if(isset($match->result) && $match->result !== null) :?>
+                                    <div class="score"><?= $match->result->home_score.'-'.$match->result->away_score; ?></div>
+                                    <?php else:?>
+                                        <small class="">VS</small>
+                                    <?php endif;?>
+                                    <div class="cl-right">
+                                        <span><img src="<?=(empty($match->away->flag) ? $this->asset('/img/post/image-thumbnail.jpg') : $match->away->flag)?>" width="40px" class="align-middle mx-2"></span>
+                                        <span class="lm-name"><span class="d-none d-lg-block"><?= $match->away->name?></span><span class="d-block d-lg-none"><?= $match->away->name?></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endforeach;?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

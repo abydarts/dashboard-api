@@ -1,0 +1,33 @@
+<?php
+    $sopts = $opts[$index];
+?>
+<?php foreach($sopts as $opt): ?>
+    <?php
+        $oid = $id . '-' . $opt->value;
+        $attrs = [
+             'type'     => 'checkbox',
+             'class'    => 'custom-control-input',
+             'name'     => $field->name . '[]',
+             'id'       => $oid,
+             'value'    => $opt->value
+        ];
+        if(in_array($opt->value, $value))
+            $attrs['checked'] = null;
+    ?>
+    <div class="custom-control custom-checkbox">
+        <input<?= to_attr($attrs) ?>>
+        <label class="custom-control-label" for="<?= $oid ?>"><?= $opt->label ?></label>
+    </div>
+    <?php if(isset($opts[$opt->value])): ?>
+        <div class="ml-3">
+        <?php
+            $item_param = [
+                'opts'  => $opts,
+                'index' => $opt->value,
+                'value' => $value
+            ];
+        ?>
+        <?= $this->partial('form/field/checkbox-tree__item', $item_param) ?>
+        </div>
+    <?php endif; ?>
+<?php endforeach; ?>

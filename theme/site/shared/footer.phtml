@@ -1,0 +1,44 @@
+<footer>
+    <section class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-5 mb-5">
+                    <div class="footer-logo">
+                        <img src="<?= $this->asset('img/logo-white.png') ?>">
+                    </div>
+                    <p><?= $this->setting->footer_description ?></p>
+                </div>
+                <div class="col-12 col-lg-2 mb-5">
+                    <div class="footer-menu">
+                        <h5 class="text-white">IFeL</h5>
+                        <ul>
+                            <li><a href="<?= $this->router->to('sitePostIndex') ?>">News</a></li>
+                            <li><a href="<?= $this->router->to('siteContact') ?>">Sponsorship</a></li>
+                            <li><a href="<?= $this->router->to('siteStaticPageSingle', ['slug' => 'terms-conditions']) ?>">Terms and Conditions</a></li>
+                            <li><a href="<?= $this->router->to('siteStaticPageSingle', ['slug' => 'privacy-policy']) ?>">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-2 mb-5">
+                    <div class="footer-menu">
+                        <h5 class="text-white">Address</h5>
+                        <address>
+                            <?= $this->setting->footer_address ?>
+                        </address>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 mb-5">
+                    <div class="footer-menu">
+                        <h5 class="text-white">Follow us</h5>
+                        <div class="social-media">
+                            <a href="<?= $this->setting->app_social_facebook ?>" class="bg-circle sm-facebook"></a>
+                            <a href="<?= $this->setting->app_social_instagram ?>" class="bg-circle sm-instagram"></a>
+                            <a href="<?= $this->setting->app_social_youtube ?>" class="bg-circle sm-youtube"></a>
+                        </div>
+                        <div><?= $this->setting->copyright ?></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>

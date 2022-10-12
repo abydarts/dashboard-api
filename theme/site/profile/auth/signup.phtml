@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <?= $this->meta->head($meta['head']) ?>
+    <?= $this->partial('shared/head') ?>
+</head>
+<body>
+<?php
+$this->partial('shared/header');
+?>
+
+<main>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="mc-col py-5 m-0">
+                        <div class="mc-title flex-column align-items-start border-0">
+                            <h2>Create Account</h2>
+                            <?php
+                            $errors = $form->getErrors();
+                            ?>
+                            <?php if($errors): ?>
+                                <div class="alert alert-danger">
+                                    <strong><?= $error_message ?? 'Whoops!' ?></strong>
+                                    <ul>
+                                        <?php foreach($errors as $name => $error): ?>
+                                            <li>[<?= $name ?>] <?= $error->text ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row auth-form">
+                            <form method="POST">
+                                <?= $form->csrfField('noob') ?>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <input type="text" name="name" class="form-control" placeholder="Name*" value="<?= $this->req->getPost('name') ?>">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <input type="email" name="email" class="form-control" placeholder="Email Address*" value="<?= $this->req->getPost('email') ?>">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <input type="number" name="phone" class="form-control" placeholder="Phone Number*" value="<?= $this->req->getPost('phone') ?>">
+                                    </div>
+                                </div>
+                                <div class="col-12 d-none">
+                                    <div class="mb-3">
+                                        <input type="text" name="birthdate" class="datepicker form-control" placeholder="Date of birth*" value="<?= $this->req->getPost('birthdate') ?>">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="input-group mb-3 shpassword">
+                                        <input id="password1" type="password" name="password" class="form-control" placeholder="Password*">
+                                        <div class="input-group-append show-hide-password" data-toggle="password1">
+                                            <button class="btn rounded-0" type="button" style="height:100%;border-color:#c7cbce;" id="button-addon-password1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#828282" class="bi bi-eye" viewBox="0 0 16 16">
+                                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-group mb-3 shpassword">
+                                        <input type="password" name="confirm_password" class="form-control" id="confirmpassword" placeholder="Confirm Password" required>
+                                        <div class="input-group-append show-hide-password" data-toggle="confirmpassword">
+                                            <button class="btn rounded-0" type="button" style="height:100%;border-color:#c7cbce;" id="button-addon-confirmpassword">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#828282" class="bi bi-eye" viewBox="0 0 16 16">
+                                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="cta">
+                                        <button type="submit" class="btn btn-primary rounded-pill px-5">Sign up</button>
+<!--                                        <div class="cta-socmed">-->
+<!--                                            <div class="label">Or sign in with</div>-->
+<!--                                            <div class="social-media mb-0">-->
+<!--                                                <a href="#" class="bg-circle"><ion-icon name="logo-facebook" size="large"></ion-icon></a>-->
+<!--                                                <a href="#" class="bg-circle"><ion-icon name="logo-google" size="large"></ion-icon></a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+                                <?php if(module_exists('lib-recaptcha')): ?>
+                                    <input type="hidden" name="secure" id="secure">
+                                <?php endif; ?>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 bg-light">
+                    <div class="mc-col text-center py-5 m-0">
+                        <div class="mc-title justify-content-center border-0">
+                            <h2 class="text-center">Welcome back!</h2>
+                        </div>
+                        <p class="text-secondary">Login to your account to keep updated with our latest news and tournaments!</p>
+                        <a href="<?= $this->router->to('siteProfileLogin') ?>" class="btn btn-outline-primary rounded-pill px-4">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?= $this->partial('shared/footer') ?>
+<?= $this->meta->foot($meta['foot']) ?>
+<?= $this->partial('shared/foot') ?>
+</body>
+
+<script>
+$(".show-hide-password").click(function() {
+    var id = $(this).data('toggle');
+    var input = $('#'+id);
+    if (input.attr("type") == "password") {
+        var html = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">' +
+                    '<path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>' +
+                    '<path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>' +
+                    '<path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>' +
+                    '</svg>'
+        $('#button-addon-'+id).html(html);
+        input.attr("type", "text");
+    } else {
+        var html = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#828282" class="bi bi-eye" viewBox="0 0 16 16">' +
+                    '<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>' +
+                    '<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>' +
+                    '</svg>'
+        $('#button-addon-'+id).html(html);
+        input.attr("type", "password");
+    }
+});
+</script>
+</html>

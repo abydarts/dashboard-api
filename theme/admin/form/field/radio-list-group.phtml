@@ -1,0 +1,60 @@
+<?php
+    $is_required = false;
+    if(is_object($field->rules)){
+        if(isset($field->rules->required) && $field->rules->required)
+            $is_required = true;
+        if(isset($field->rules->empty) && !$field->rules->empty)
+            $is_required = true;
+    }
+
+    $opts = $options;
+    if(isset($field->options))
+        $opts = (array)$field->options;
+    
+    if(isset($rules->enum))
+        $opts = (array)\Mim::$app->config->libEnum->enums->{$rules->enum};
+
+    if(isset($options))
+        $opts = $options;
+?>
+
+<div class="form-group<?= ($error?' is-invalid':'') ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <div class="list-group list-group-form">
+        <?php foreach($opts as $val => $conf): ?>
+            <?php
+                $conf = (object)$conf;
+                $oid = $id . '-' . $val;
+                $attrs = [
+                    'type' => 'radio',
+                    'name' => $field->name,
+                    'value'=> $val,
+                    'id'   => $oid
+                ];
+                if($val == $value)
+                    $attrs['checked'] = null;
+                if($is_required)
+                    $attrs['required'] = NULL;
+            ?>
+            <input<?= to_attr($attrs) ?>>
+            <label class="list-group-item list-group-item-action" for="<?= hs($oid) ?>">
+                <?php if(isset($conf->info) || isset($conf->hint)): ?>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><?= hs($conf->label) ?></h5>
+                        <?php if(isset($conf->hint)): ?>
+                            <small><?= $conf->hint ?></small>
+                        <?php endif; ?>
+                    </div>
+                    <?php if(isset($conf->info)): ?>
+                        <p class="mb-1"><?= hs($conf->info) ?></p>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <?= hs($conf->label) ?>
+                <?php endif; ?>
+            </label>
+        <?php endforeach; ?>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

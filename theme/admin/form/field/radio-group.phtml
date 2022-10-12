@@ -1,0 +1,59 @@
+<?php
+    $opts = [];
+    if(isset($field->options))
+        $opts = (array)$field->options;
+    
+    if(isset($rules->enum))
+        $opts = (array)\Mim::$app->config->libEnum->enums->{$rules->enum};
+
+    if(isset($options))
+        $opts = $options;
+
+    $fid  = $id . '-';
+    foreach($opts as $opt => $label){
+        $fid.= $opt;
+        break;
+    }
+
+    $is_required = false;
+    if(is_object($field->rules)){
+        if(isset($field->rules->required) && $field->rules->required)
+            $is_required = true;
+        if(isset($field->rules->empty) && !$field->rules->empty)
+            $is_required = true;
+    }
+
+    $big_class = '';
+
+    // big size
+    if(isset($field->size))
+        $big_class = ' size-' . $field->size;
+?>
+<div class="form-group<?= ($error?' is-invalid':'') ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $fid ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <div class="radio-group<?= $big_class ?>">
+        <?php foreach($opts as $val => $label): ?>
+            <?php
+                $oid = $id . '-' . $val;
+                $attrs = [
+                     'type'     => 'radio',
+                     'class'    => 'custom-control-input',
+                     'name'     => $field->name,
+                     'id'       => $oid,
+                     'value'    => $val
+                ];
+                if($val == $value)
+                    $attrs['checked'] = null;
+                if($is_required)
+                    $attrs['required'] = NULL;
+            ?>
+            <div class="custom-control custom-radio">
+                <input<?= to_attr($attrs) ?>>
+                <label class="custom-control-label" for="<?= $oid ?>"><?= $label ?></label>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

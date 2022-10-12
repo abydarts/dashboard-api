@@ -1,0 +1,48 @@
+<?php $sidebar_flat = \AdminUi\Library\Menu::getFlatSidebar($_meta); ?>
+<?php $sidebar_tree = \AdminUi\Library\Menu::getTreeSidebar($_meta); ?>
+
+<nav class="navbar navbar-expand fixed-top navbar-dark bg-primary" id="navbar-main">
+    <?php if($sidebar_flat || $sidebar_tree): ?>
+    <button class="navbar-btn mr-4" type="button" data-toggle="drawer" data-target="#drawer-main" accesskey="m">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <?php endif; ?>
+    <a href="<?= $this->router->to('adminHome') ?>" class="navbar-brand"><?= hs($_meta['title']) ?></a>
+
+    <?php $navbar = \AdminUi\Library\Menu::getNavbar($_meta); ?>
+    <?php if($navbar): ?>
+    <div class="collapse navbar-collapse" id="navbar-main">
+        <ul class="navbar-nav ml-auto">
+            
+            <?php foreach($navbar as $menu): ?>
+                <?php if(isset($menu->children)): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="<?= hs($menu->link) ?>" id="navbar-<?= hs($menu->id) ?>" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?= ( isset($menu->icon) ? $menu->icon : '' ) ?> <?= hs($menu->label) ?>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-<?= hs($menu->id) ?>">
+                            <?php foreach($menu->children as $men): ?>
+                                <?php if($men->label === '---'): ?>
+                                    <div class="dropdown-divider"></div>
+                                <?php else: ?>
+                                    <a class="dropdown-item" href="<?= hs($men->link) ?>">
+                                        <?= ( isset($men->icon) ? $men->icon : '' ) ?> <?= hs($men->label) ?>
+                                    </a>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+
+                        </div>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= hs($menu->link) ?>">
+                            <?= ( isset($menu->icon) ? $menu->icon : '' ) ?> <?= hs($menu->label) ?>
+                        </a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+        </ul>
+    </div>
+    <?php endif; ?>
+</nav>

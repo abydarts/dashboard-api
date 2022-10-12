@@ -1,0 +1,7 @@
+<div class="mc-submenu mb-3 sticky-top">
+    <ul>
+        <li><a href="<?= $this->router->to('siteTournamentSingle', ['id' => $this->req->param->id]) ?>" class="<?= $this->req->route->name == 'siteTournamentSingle' ? 'active': ''?>">Bracket</a></li>
+        <li><a href="<?= $this->router->to('siteTournamentSingleRules', ['id' => $this->req->param->id]) ?>" class="<?= $this->req->route->name == 'siteTournamentSingleRules' ? 'active': ''?>">Peraturan</a></li>
+        <li><a href="<?= $this->router->to('siteTournamentSingleMatch', ['id' => $this->req->param->id]) ?>" class="<?= $this->req->route->name == 'siteTournamentSingleMatch' ? 'active': ''?>">Pertandingan</a></li>
+    </ul>
+</div>

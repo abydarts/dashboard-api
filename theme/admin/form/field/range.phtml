@@ -1,0 +1,23 @@
+<?php
+    $attrs = [
+        'type'  => 'range',
+        'class' => 'custom-range',
+        'id'    => $id,
+        'value' => ($value??0),
+        'name'  => $field->name
+    ];
+
+    if(isset($rules->numeric) && is_object($rules->numeric)){
+        if(isset($rules->numeric->min))
+            $attrs['min'] = $rules->numeric->min;
+        if(isset($rules->numeric->max))
+            $attrs['max'] = $rules->numeric->max;
+    }
+?>
+<div class="form-group<?= ($error ? ' is-invalid' : '' ) ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <input<?= to_attr($attrs) ?>>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

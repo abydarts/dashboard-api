@@ -1,0 +1,46 @@
+<?= '<?xml version="1.0" ?>' . PHP_EOL ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <atom:link href="<?= $options->self_url ?>" rel="self" type="application/rss+xml" />
+        <copyright>Copyright <?= hs($options->copyright_year) ?>, <?= hs($options->copyright_name) ?></copyright>
+        <description><?= $options->description ?></description>
+        <generator>MIM/libRobot</generator>
+        <language><?= hs($options->language) ?></language>
+        <lastBuildDate><?= $options->updated ?></lastBuildDate>
+        <link><?= $options->host ?></link>
+        <pubDate><?= $options->created ?></pubDate>
+        <title><?= $options->title ?></title>
+        <image>
+            <url><?= $this->asset('static/logo/72x72.png') ?></url>
+            <link><?= $options->host ?></link>
+            <title><?= $options->title ?></title>
+            <description><?= $options->description ?></description>
+        </image>
+
+        <?php foreach($pages as $page): ?>
+            <item>
+                <atom:link href="<?= $options->self_url ?>" rel="self" type="application/rss+xml" />
+                
+                <?php if(isset($page->author)): ?>
+                    <dc:creator><![CDATA[<?= hs($page->author) ?>]]></dc:creator>
+                <?php endif; ?>
+
+                <?php if(isset($page->categories)): ?>
+                    <?php foreach($page->categories as $cat): ?>
+                        <category><![CDATA[<?= hs($cat) ?>]]></category>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <?php if(isset($page->comment)): ?>
+                    <comments><?= hs($page->comment) ?></comments>
+                <?php endif; ?>
+
+                <description><![CDATA[<?= hs($page->description) ?>]]></description>
+                <guid><?= hs($page->guid) ?></guid>
+                <link><?= hs($page->page) ?></link>
+                <pubDate><?= date('r', strtotime($page->published)) ?></pubDate>
+                <title><?= hs($page->title) ?></title>
+            </item>
+        <?php endforeach; ?>
+    </channel>
+</rss>

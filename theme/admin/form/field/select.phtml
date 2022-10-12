@@ -1,0 +1,60 @@
+<?php
+    $opts = [];
+    if(isset($field->options))
+        $opts = (array)$field->options;
+    
+    if(isset($rules->enum))
+        $opts = (array)\Mim::$app->config->libEnum->enums->{$rules->enum};
+
+    if(isset($options))
+        $opts = $options;
+
+    $attrs = [
+        'class'       => 'selectpicker '.($field->classname ?? ''),
+        'id'          => $id,
+        'name'        => $field->name,
+        'placeholder' => $field->label,
+        'style'       => 'width:100%;',
+    ];
+    if(isset($rules->required) && $rules->required)
+        $attrs['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $attrs['required'] = null;
+
+    if(isset($field->{'sl-filter'})){
+        $ac_route = $field->{'sl-filter'};
+        $acr_name = $ac_route->route  ?? null;
+        $acr_parms= $ac_route->params ?? null;
+        $acr_qry  = $ac_route->query  ?? null;
+
+        if($acr_name){
+            $ac_route = $this->router->to($acr_name, (array)$acr_parms);
+            $attrs['data-ajax'] = $ac_route;
+            if($acr_qry){
+                foreach($acr_qry as $fkey => $fval){
+                    if(substr($fval, 0, 1) !== '#')
+                        continue;
+                    
+                    $fval = $form->getName() . '-fld-' . substr($fval,1);
+                    $fval = preg_replace('![^a-zA-Z0-9-]!', '-', $fval);
+                    $fval = preg_replace('!-+!', '-', $fval);
+
+                    $acr_qry->$fkey = '#' . $fval;
+                }
+                $attrs['data-data'] = json_encode($acr_qry);
+            }
+        }
+    }
+?>
+<div class="form-group<?= ($error?' is-invalid':'') ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+
+    <select<?= to_attr($attrs) ?>>
+        <?php foreach($opts as $val => $label): ?>
+            <option value="<?= hs($val) ?>"<?= ($val==$value?' selected':'') ?>><?= hs($label) ?></option>
+        <?php endforeach; ?>
+    </select>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

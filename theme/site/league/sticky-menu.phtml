@@ -1,0 +1,30 @@
+<div class="mc-submenu sticky-top">
+    <ul>
+        <li><a href="<?= $this->router->to('siteLeagueSingle',['id'=> $league->id]) ?>" class="<?= $this->req->route->name == 'siteLeagueSingle' ? 'active': ''?>">About</a></li>
+
+        <?php if(in_array($league->id, [3,4])) :?>
+            <li><a href="<?= $this->router->to('siteLeagueClassement',['id'=> 3])?>" class="<?= $this->req->route->name == 'siteLeagueClassement' ? 'active': ''?>">Standing</a></li>
+        <li><a href="<?= $this->router->to('siteLeagueSchedule',['id'=> 3])?>" class="<?= $this->req->path == '/league/3/schedule' ? 'active': ''?>">Schedule Group A </a></li>
+        <li><a href="<?= $this->router->to('siteLeagueSchedule',['id'=> 4])?>" class="<?= $this->req->path == '/league/4/schedule' ? 'active': ''?>">Schedule Group B</a></li>
+            <li class=""><a href="<?= $this->router->to('siteLeagueClub',['id'=> 3])?>" class="<?= $this->req->path == '/league/3/club' ? 'active': ''?>">Group A</a></li>
+            <li class=""><a href="<?= $this->router->to('siteLeagueClub',['id'=> 4])?>" class="<?= $this->req->path == '/league/4/club' ? 'active': ''?>">Group B</a></li>
+        <?php elseif(in_array($league->id, [7,8])) :?>
+            <li><a href="<?= $this->router->to('siteLeagueClassement',['id'=> 7])?>" class="<?= $this->req->route->name == 'siteLeagueClassement' ? 'active': ''?>">Standing</a></li>
+            <li><a href="<?= $this->router->to('siteLeagueSchedule',['id'=> 7])?>" class="<?= $this->req->path == '/league/7/schedule' ? 'active': ''?>">Schedule Group A </a></li>
+            <li><a href="<?= $this->router->to('siteLeagueSchedule',['id'=> 8])?>" class="<?= $this->req->path == '/league/8/schedule' ? 'active': ''?>">Schedule Group B</a></li>
+            <li class=""><a href="<?= $this->router->to('siteLeagueClub',['id'=> 7])?>" class="<?= $this->req->path == '/league/7/club' ? 'active': ''?>">Group A</a></li>
+            <li class=""><a href="<?= $this->router->to('siteLeagueClub',['id'=> 8])?>" class="<?= $this->req->path == '/league/8/club' ? 'active': ''?>">Group B</a></li>
+        <?php elseif(in_array($league->id, [9])) : ?>
+            <li><a href="<?= $this->router->to('siteLeagueSchedule',['id'=> $league->id])?>" class="<?= $this->req->route->name == 'siteLeagueSchedule' ? 'active': ''?>">Schedule</a></li>
+        <?php elseif(in_array($league->id, [10])) : ?>
+            <li><a href="<?= $this->router->to('siteLeagueSchedule',['id'=> $league->id])?>" class="<?= $this->req->route->name == 'siteLeagueSchedule' ? 'active': ''?>">Schedule</a></li>
+            <li><a href="<?= $this->router->to('siteLeagueClub',['id'=> $league->id])?>" class="<?= $this->req->route->name == 'siteLeagueClub' ? 'active': ''?>">Club Profile</a></li>
+        <?php else : ?>
+            <li><a href="<?= $this->router->to('siteLeagueClassement',['id'=> $league->id])?>" class="<?= $this->req->route->name == 'siteLeagueClassement' ? 'active': ''?>">Standing</a></li>
+            <li><a href="<?= $this->router->to('siteLeagueSchedule',['id'=> $league->id])?>" class="<?= $this->req->route->name == 'siteLeagueSchedule' ? 'active': ''?>">Schedule</a></li>
+            <li class=""><a href="<?= $this->router->to('siteLeagueClub',['id'=> $league->id])?>" class="<?= $this->req->route->name == 'siteLeagueClub' ? 'active': ''?>">Club Profile</a></li>
+        <?php endif ?>
+
+        <li class="d-none"><a href="<?= $this->router->to('siteLeagueClubStatistic',['id'=> $league->id])?>" class="<?= $this->req->route->name == 'siteLeagueClubStatistic' ? 'active': ''?>">Statistic</a></li>
+    </ul>
+</div>

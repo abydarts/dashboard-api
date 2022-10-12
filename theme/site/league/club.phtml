@@ -1,0 +1,96 @@
+<main>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="mc-col">
+                        <?= $this->partial('league/sticky-menu') ?>
+                        <input type="hidden" id="league-id" value="<?= $league->id?>">
+                        <div class="mc-title">
+                            <h2>Club Profile</h2>
+                        </div>
+                        <div class="mc-col">
+                            <div class="club-logo">
+                                <?php foreach($teams as $i => $team):?>
+                                <div class="cl-li">
+                                    <a href="javascript:void(0)" class="select-club <?= $i == 0 ? 'active':''?>" data-id="<?= $team->team->id ?>">
+                                        <img src="<?= empty($team->team->flag) ? $this->asset('/img/post/image-thumbnail.jpg') : $team->team->flag ?>">
+                                    </a>
+                                </div>
+                                <?php endforeach;?>
+                            </div>
+                        </div> <!-- end col -->
+                        <div class="mc-col club-detail-wrapper">
+                            <div class="club-row">
+                                <div class="club-details club-<?= !empty($teams[0]->team->id) ? $teams[0]->team->id : "" ?>">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-2">
+                                            <img src="<?= empty($teams[0]->team->flag) ? $this->asset('/img/post/image-thumbnail.jpg') : $teams[0]->team->flag ?>" class="logo-club">
+                                        </div>
+                                        <div class="col-12 col-lg-10">
+                                            <div class="row">
+                                                <div class="cd-li">
+                                                    <div class="title">Games</div>
+                                                    <div class="score"><?= $teams[0]->match_played ?? 0 ?></div>
+                                                </div>
+                                                <div class="cd-li">
+                                                    <div class="title">Wins</div>
+                                                    <div class="score"><?= $teams[0]->win ?? 0 ?></div>
+                                                </div>
+                                                <div class="cd-li">
+                                                    <div class="title">Goal Scored</div>
+                                                    <div class="score"><?= $teams[0]->goal_for ?? 0 ?></div>
+                                                </div>
+                                                <div class="cd-li">
+                                                    <div class="title">Draws</div>
+                                                    <div class="score"><?= $teams[0]->draw ?? 0 ?></div>
+                                                </div>
+                                                <div class="cd-li">
+                                                    <div class="title">Lose</div>
+                                                    <div class="score"><?= $teams[0]->lose ?? 0 ?></div>
+                                                </div>
+                                                <div class="cd-li">
+                                                    <div class="title">Fouls</div>
+                                                    <div class="score"><?= $teams[0]->fouls ?? 0 ?></div>
+                                                </div>
+                                                <div class="cd-li">
+                                                    <div class="title">Passes Success</div>
+                                                    <div class="score"><?= $teams[0]->pass_success ?? 0 ?></div>
+                                                </div>
+                                                <div class="cd-li">
+                                                    <div class="title">Goal Concended</div>
+                                                    <div class="score"><?= $teams[0]->goal_against ?? 0 ?></div>
+                                                </div>
+                                                <div class="cd-li">
+                                                    <div class="title">Saves</div>
+                                                    <div class="score"><?= $teams[0]->saves ?? 0 ?></div>
+                                                </div>
+                                                <div class="cd-li">
+                                                    <div class="title">Clean Sheets</div>
+                                                    <div class="score"><?= $teams[0]->clean_sheets ?? 0 ?></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="club-players">
+                                <div class="row">
+                                    <?php if(isset($teams[0]->team->players)) :?>
+                                    <?php foreach($teams[0]->team->players as $player):?>
+                                    <div class="col-6 col-lg-4 club-player club-<?=$teams[0]->team->id?>">
+                                        <a href="#" class="cp-li"><img src="<?= $player->avatar ?>"></a>
+                                        <h5><?= $player->name ?></h5>
+                                    </div>
+                                    <?php endforeach;?>
+                                    <?php endif;?>
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

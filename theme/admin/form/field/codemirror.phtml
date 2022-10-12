@@ -1,0 +1,28 @@
+<?php
+    $mode = $field->mode ?? null;
+
+    $value = (string)$value;
+    $attrs = [
+        'class'       => 'form-control form-codemirror',
+        'placeholder' => $field->label,
+        'id'          => $id,
+        'name'        => $field->name
+    ];
+
+    if($mode){
+        \AdminUi\Library\Assets::addAsset('js', 'foot', 'js/codemirror/' . $field->mode . '.js', '1');
+        $attrs['data-mode'] = $mode;
+    }
+
+    if(isset($rules->required) && $rules->required)
+        $attrs['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $attrs['required'] = null;
+?>
+<div class="form-group<?= ($error?' is-invalid':'') ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <textarea<?= to_attr($attrs) ?>><?= hs($value) ?></textarea>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

@@ -1,0 +1,18 @@
+<main>
+    <section class="main-container bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 offset-lg-3">
+                    <div class="mc-card border bg-white text-center p-4">
+                        <div class="text-secondary">Nomor Invoice</div>
+                        <div class="text-secondary fw-bold mb-3"><?= $purchase_no ?></div>
+                        <div class="mb-3"><img src="<?= $this->asset('img/check.png') ?>"></div>
+                        <h5 class="text-primary">Terima kasih atas pembelian Anda</h5>
+                        <div class="text-muted mb-3">Sistem kami akan segera memeriksa pembayaran Anda dan barang akan segera dikirim ke alamat Anda.</div>
+                        <div><a href="<?= $this->router->to('siteMatchSingle', ['id' => $match->id]) ?>" class="btn btn-outline-success btn-lg rounded-pill px-5">Watch Match</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

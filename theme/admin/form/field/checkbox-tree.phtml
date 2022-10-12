@@ -1,0 +1,42 @@
+<?php
+    $opts = [];
+    if(isset($field->options))
+        $opts = (array)$field->options;
+    if(isset($options))
+        $opts = $options;
+
+    $value = (array)$value;
+
+    $opts = group_by_prop($opts, 'parent');
+    $fid  = $id . '-';
+    if(isset($opts[0])){
+        foreach($opts[0] as $opt){
+            $fid.= $opt->value;
+            break;
+        }
+    }
+
+    $big_class = '';
+
+    // big size
+    if(isset($field->size))
+        $big_class = ' size-' . $field->size;
+?>
+<div class="form-group <?= ($error ? ' is-invalid' : '' ) ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $fid ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <div class="checkbox-group<?= $big_class ?>">
+        <?php if(isset($opts[0])): ?>
+            <?php
+                $item_param = [
+                    'opts'  => $opts,
+                    'index' => 0,
+                    'value' => $value
+                ];
+            ?>
+            <?= $this->partial('form/field/checkbox-tree__item', $item_param) ?>
+        <?php endif; ?>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

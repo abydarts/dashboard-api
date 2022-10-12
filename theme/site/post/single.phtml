@@ -1,0 +1,54 @@
+<main>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="mc-col">
+                        <div class="featured-post full-featured-post mb-3">
+                            <?php if(!empty($post->embed) && $post->embed != null && $post->embed != '') :?>
+                                <?= $post->embed ?>
+                            <?php else :?>
+                                <a href="#" class="btn-card">
+                                    <div class="fp-li card border-0">
+                                        <img src="<?=( empty($post->cover->url) ? $this->asset('/img/post/image-thumbnail.jpg') : $post->cover->url ) ?>" class="card-img-top" alt="<?= $post->cover->label ?>>">
+                                    </div>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                        <div class="featured-post full-featured-post mb-3">
+
+                        </div>
+                        <div class="mc-label mb-3">
+                            <?php foreach($post->category as $cat):?>
+                                <a href="<?= $cat->page ?>"><span class="badge bg-secondary px-3 rounded-pill"><?= $cat->name?></span></a>
+                            <?php endforeach;?>
+                        </div>
+                        <div class="mc-title flex-column align-items-start">
+                            <h1 class="text-primary mb-2"><?= $post->title->safe ?></h1>
+                            <div class="text-muted">
+                                <span class="me-3"><?= ucwords($post->user->name) ?></span>
+                                <span><?= $post->published->format('D, d M Y H:i') ?> WIB</span>
+                            </div>
+                        </div>
+                        <div class="mc-content">
+                            <?= ($post->content) ?>
+                        </div>
+                        <div class="py-3">
+                            <div class="d-flex align-items-center">
+                                <div class="label text-muted me-4">Share:</div>
+                                <div class="social-media mb-0">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($post->page) ?>" target="_blank" class="bg-circle"><ion-icon name="logo-facebook"></ion-icon></a>
+                                    <a href="https://twitter.com/share?url=<?= urlencode($post->page) ?>&via=pasarental&text=<?= urlencode($post->title) ?>" target="_blank" class="bg-circle"><ion-icon name="logo-twitter"></ion-icon></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-3 mb-5">
+                            <a href="<?= $this->router->to('sitePostIndex') ?>" class="btn-arrow-reverse">All News</a>
+                        </div>
+                    </div>
+                </div>
+                <?= $sidebar_content ?>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,115 @@
+<main>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="mc-col">
+                        <?= $this->partial('league/sticky-menu') ?>
+                        <div class="mc-title">
+                            <h2>Standing</h2>
+                        </div>
+                        <div class="mc-col">
+                            <div class="league-table mc-table full-table mb-4">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2"><?= $league->name ?></th>
+                                        <th>P</th>
+                                        <th>W</th>
+                                        <th>D</th>
+                                        <th>L</th>
+                                        <th>GF</th>
+                                        <th>GA</th>
+                                        <th>GD</th>
+                                        <th>PTS</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($league->classement as $key => $team):?>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="d-inline-block" style="width:18px"><?=$key+1?></div>
+                                            <img src="<?= $team->team->flag ?>" width="20px" class="align-middle me-2"><span class="d-inline-block d-sm-none"><?= $team->team->nickname ?></span><span class="full-name d-none d-sm-inline-block"><?= $team->team->name ?></span>
+                                        </td>
+                                        <td><?=$team->match_played?></td>
+                                        <td><?=$team->win?></td>
+                                        <td><?=$team->draw?></td>
+                                        <td><?=$team->lose?></td>
+                                        <td><?=$team->goal_for?></td>
+                                        <td><?=$team->goal_against?></td>
+                                        <td><?=$team->goal_difference?></td>
+                                        <td><?=$team->point?></td>
+                                    </tr>
+                                    <?php endforeach;?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <?php if(isset($groupB)) : ?>
+                            <div class="league-table mc-table full-table mb-4">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2"><?= $groupB->name ?></th>
+                                        <th>P</th>
+                                        <th>W</th>
+                                        <th>D</th>
+                                        <th>L</th>
+                                        <th>GF</th>
+                                        <th>GA</th>
+                                        <th>GD</th>
+                                        <th>PTS</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($groupB->classement as $key => $team):?>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="d-inline-block" style="width:18px"><?=$key+1?></div>
+                                                <img src="<?= $team->team->flag ?>" width="20px" class="align-middle me-2"><span class="d-inline-block d-sm-none"><?= $team->team->nickname ?></span><span class="full-name d-none d-sm-inline-block"><?= $team->team->name ?></span>
+                                            </td>
+                                            <td><?=$team->match_played?></td>
+                                            <td><?=$team->win?></td>
+                                            <td><?=$team->draw?></td>
+                                            <td><?=$team->lose?></td>
+                                            <td><?=$team->goal_for?></td>
+                                            <td><?=$team->goal_against?></td>
+                                            <td><?=$team->goal_difference?></td>
+                                            <td><?=$team->point?></td>
+                                        </tr>
+                                    <?php endforeach;?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <?php endif;?>
+                            <div class="table-desc">
+                                <div class="row">
+                                    <?php if(!isset($groupB)) : ?>
+                                    <hr>
+                                        <div class="col-12 mb-3 text-center bold"> Highlight: 8 clubs will be qualified to grand finals</div>
+                                    <hr>
+                                    <?php endif; ?>
+                                    <div class="col-6 col-lg-3 mb-3">
+                                        <div><strong>P -</strong> Matches Played</div>
+                                        <div><strong>W -</strong> Won</div>
+                                    </div>
+                                    <div class="col-6 col-lg-3 mb-3">
+                                        <div><strong>D -</strong> Draw</div>
+                                        <div><strong>L -</strong> Lost</div>
+                                    </div>
+                                    <div class="col-6 col-lg-3 mb-3">
+                                        <div><strong>GF -</strong> Goal For</div>
+                                        <div><strong>GA -</strong> Goal Against</div>
+                                    </div>
+                                    <div class="col-6 col-lg-3 mb-3">
+                                        <div><strong>GD -</strong> Goal Difference</div>
+                                        <div><strong>Pts -</strong> Points</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

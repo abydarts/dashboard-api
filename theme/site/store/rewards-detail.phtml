@@ -1,0 +1,104 @@
+<main>
+    <section class="main-container bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 offset-lg-3">
+                    <div class="mc-col">
+                        <div class="row mb-4">
+                            <div class="" id="wizard-store">
+                                <h3 class="text-primary fw-bold"><?= $reward->status == 1 ? 'Konfirmasi Pengiriman': 'Reward Detail'?></h3>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 99%;background-color: #198754;" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="row">
+                                    <?php if(!empty($address)) :?>
+                                        <div class="col-12">
+                                            <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="flush-headingOne">
+                                                        <button class="accordion-button collapsed ws-method" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                            <span><?= $reward->product->name ?></span>
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body text-secondary">
+                                                            <div class="mb-3">Tujuan</div>
+                                                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                                                <div>
+                                                                    <div>Penerima</div>
+                                                                    <div class="fw-bold"><?= $reward->product->type == 2 ? $this->profile->name : $address->name ?></div>
+                                                                    <?php if($reward->product->type == 1) :?>
+                                                                        <div class="fw-bold"><?= $address->phone ?></div>
+                                                                    <?php endif;?>
+                                                                </div>
+                                                                <?php if($reward->status == 1):?>
+                                                                <div>
+                                                                    <a href="<?= $this->router->to('siteProfileAddress')?>?mode=edit"><?= $reward->product->type == 1 ? 'Edit' : 'Edit Address'?></a>
+                                                                </div>
+                                                                <?php endif;?>
+                                                            </div>
+                                                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                                                <?php if($reward->product->type == 0) :?>
+                                                                <div>
+                                                                    <div>Alamat:</div>
+                                                                    <div class="fw-bold">
+                                                                        <?= $address->address ?> <br>
+                                                                        <?= $address->state ?>, <?= $address->postal_code ?>  <br>
+                                                                        <?= $address->phone ?>
+                                                                    </div>
+                                                                </div>
+                                                                <?php elseif($reward->product->type == 1) :?>
+                                                                <?php elseif($reward->product->type == 2) :?>
+
+                                                                <?php endif;?>
+                                                            </div>
+                                                            <?php if($reward->status == 2 && $reward->product->type == 0) :?>
+                                                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                                                <div>
+                                                                    <div>No Resi:</div>
+                                                                    <div class="fw-bold">
+                                                                        <?= empty($reward->airwaybill) ? 'No resi akan segera di-update. Mohon menunggu' : $reward->airwaybill?>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <?php endif;?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php if($reward->status == 1):?>
+                                            <div class="col-12">
+                                                <div class="alert alert-success">Harap pastikan tujuan pengiriman produk sudah sesuai!</div>
+                                            </div>
+                                            <form method="post" action="<?= $this->router->to('siteStoreClaim', ['id' => $reward->id])?>">
+                                            <div class="d-grid">
+                                                <?= $form->csrfField('noob') ?>
+                                                <input type="hidden" name="transaction_id" value="<?= $reward->id ?>">
+                                                <button type="submit" class="btn btn-success rounded-pill py-3">Claim Now!</button>
+                                            </div>
+                                            </form>
+                                        <?php elseif($reward->status == 3):?>
+                                            <div class="col-12">
+                                                <div class="alert alert-success"><?= $reward->product->type == 1 ? 'Mohon cek status pengiriman berdasarkan resi secara berkala.':''?> Jika Anda belum menerima silahkan hubungi kami <a href="<?= $this->router->to('siteContact')?>">disini!</a></div>
+                                            </div>
+                                        <?php endif;?>
+                                        <?php if (!empty($reward->airwaybill)) : ?>
+                                            <button type="submit" class="btn btn-success rounded-pill py-3">Check Resi</button>
+                                        <?php endif;?>
+                                    <?php else :?>
+                                        <?php if($reward->status == 1):?>
+                                            <div class="col-12">
+                                                <div class="alert alert-warning">Anda belum mengisi data alamat Anda. Mohon update alamat Anda dengan <a href="<?= $this->router->to('siteProfileAddress')?>?mode=edit">klik disini!</a></div>
+                                            </div>
+                                        <?php endif;?>
+                                    <?php endif;?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

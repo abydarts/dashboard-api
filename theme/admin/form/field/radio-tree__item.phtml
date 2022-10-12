@@ -1,0 +1,36 @@
+<?php
+    $sopts = $opts[$index];
+?>
+<?php foreach($sopts as $opt): ?>
+    <?php
+        $oid = $id . '-' . $opt->value;
+        $attrs = [
+             'type'     => 'radio',
+             'class'    => 'custom-control-input',
+             'name'     => $field->name,
+             'id'       => $oid,
+             'value'    => $opt->value
+        ];
+        if($opt->value == $value)
+            $attrs['checked'] = null;
+        if($required)
+            $attrs['required'] = NULL;
+    ?>
+    <div class="custom-control custom-radio">
+        <input<?= to_attr($attrs) ?>>
+        <label class="custom-control-label" for="<?= $oid ?>"><?= $opt->label ?></label>
+    </div>
+    <?php if($opt->parent != $opt->value && isset($opts[$opt->value])): ?>
+        <div class="ml-3">
+        <?php
+            $item_param = [
+                'opts'  => $opts,
+                'index' => $opt->value,
+                'value' => $value,
+                'required' => $required
+            ];
+        ?>
+            <?= $this->partial('form/field/radio-tree__item', $item_param) ?>
+        </div>
+    <?php endif; ?>
+<?php endforeach; ?>

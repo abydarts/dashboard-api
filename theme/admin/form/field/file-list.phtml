@@ -1,0 +1,44 @@
+<?php
+    $l_id = $id . '-action';
+    $t_attr = [
+        'id'    => $id,
+        'name'  => $field->name,
+        'class' => 'formfiles-model'
+    ];
+
+    if(isset($rules->required) && $rules->required)
+        $t_attr['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $t_attr['required'] = null;
+
+    $f_attr = [
+        'class'      => 'formfiles',
+        'data-model' => '#' . $id
+    ];
+    $upload_form = null;
+    if(isset($field->form))
+        $upload_form = $field->form;
+    elseif(isset($rules->{'upload-list'}) && is_string($rules->{'upload-list'}))
+        $upload_form = $rules->{'upload-list'};
+
+    if($upload_form){
+        $f_attr['data-form'] = $upload_form;
+        $mimes = $this->config->libUpload->forms->$upload_form->mime ?? NULL;
+        if($mimes)
+            $f_attr['data-accept'] = implode(',', $mimes);
+    }
+
+    if($value && ( is_object($value) || is_array($value)))
+        $value = json_encode($value);
+?>
+<div class="form-group<?= ($error ? ' is-invalid' : '' ) ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $l_id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <textarea<?= to_attr($t_attr) ?>><?= hs($value??'') ?></textarea>
+    <div<?= to_attr($f_attr) ?>>
+        <ul class="formfiles-items"></ul>
+        <button class="formfiles-btn-add btn btn-light btn-block" id="<?= $l_id ?>" type="button">Add File</button>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

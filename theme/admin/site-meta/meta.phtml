@@ -1,0 +1,8 @@
+<?php if(isset($schemas)): ?>
+    <?= $form->field('meta-schema', $schemas); ?>
+<?php else: ?>
+    <?= $form->field('meta-schema'); ?>
+<?php endif; ?>
+<?= $form->field('meta-title'); ?>
+<?= $form->field('meta-description'); ?>
+<?= $form->field('meta-keywords'); ?>

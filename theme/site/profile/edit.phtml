@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <?= $this->meta->head($meta['head']) ?>
+    <?= $this->partial('shared/head') ?>
+    <style>
+        .overlay {
+            object-fit: cover;
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 50px;
+            bottom: 0;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+        }
+        .img-profile:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay .text {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<?php
+$this->partial('shared/header');
+?>
+
+<main>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="mc-col py-4 m-0 mb-5">
+                        <div class="mc-card widget-profile">
+                            <div class="cover-image"></div>
+                            <!-- upload image -->
+                            <label style="width:100%;" class="imageRow">
+                                <div class="avatar img-profile">
+                                    <img class="getAva" src="<?= $this->profile->avatar?>">
+                                    <div class="overlay">
+                                        <div class="text">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+                                                <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+                                                <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="file" id="imgProfile" name="imgProfile" class="form-control invisible d-none ImageMerchantUpload" accept="image/png, image/gif, image/jpeg">
+                            </label>
+                            <!-- end upload image -->
+                            
+                            <div class="profile-text">
+                                <div class="profile-name"><?= $this->profile->name ?></div>
+                            </div>
+                            <div class="wallets" style="width: 80%;transform: translateX(13%);">
+                                <?php if($this->req->getQuery('mode') == 'edit') :?>
+                                <div class="col-md-12">
+                                    <form method="post">
+                                        <?= $form->csrfField('noob') ?>
+                                        <input type="hidden" class="imgURL" id="avatar" name="avatar" value="<?= $edit->avatar ?? '' ?>">
+                                        <div class="mb-3">
+                                            <label for="input-userid" class="form-label text-secondary">Name</label>
+                                            <input type="text" name="name" class="form-control form-control-lg" placeholder="Name" value="<?= $edit->name ?? '' ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="input-userid" class="form-label text-secondary">Email</label>
+                                            <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" value="<?= $edit->email ?? '' ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="phone" class="form-label text-secondary">Phone Number</label>
+                                            <input id="phone" type="text" name="phone" class="form-control form-control-lg" placeholder="Phone" value="<?= $edit->phone ?? '' ?>">
+                                        </div>
+                                        <label for="password" class="form-label text-secondary">Password</label>
+                                        <div class="input-group mb-3 shpassword">
+                                            <input id="password" type="password" name="password" class="form-control form-control-lg" placeholder="Password" value="">
+                                            <div class="input-group-append show-hide-password" data-toggle="password">
+                                                <button class="btn rounded-0" type="button" style="height:100%;border-color:#c7cbce;" id="button-addon-password">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#828282" class="bi bi-eye" viewBox="0 0 16 16">
+                                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <label for="confirmpassword" class="form-label text-secondary">re-Password</label>
+                                        <div class="input-group mb-3 shpassword">
+                                            <input id="confirmpassword" type="password" name="confirmpassword" class="form-control form-control-lg" placeholder="Confirm Password" value="">
+                                            <div class="input-group-append show-hide-password" data-toggle="confirmpassword">
+                                                <button class="btn rounded-0" type="button" style="height:100%;border-color:#c7cbce;" id="button-addon-confirmpassword">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#828282" class="bi bi-eye" viewBox="0 0 16 16">
+                                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-success rounded-pill py-3 w-100 mt-5">Simpan</button>
+                                    </form>
+                                </div>
+                                <?php else :?>
+                                    <div>
+                                        <table class="table">
+                                            <tr class="text-start">
+                                                <td class=" ms-3" width="130px">Name</td>
+                                                <td>: <?= $edit->name ?? '-' ?></td>
+                                            </tr>
+                                            <tr class="text-start">
+                                                <td>Email</td>
+                                                <td>: <?= $edit->email ?? '-' ?></td>
+                                            </tr>
+                                            <tr class="text-start">
+                                                <td>Phone</td>
+                                                <td>: <?= $edit->phone ?? '-' ?></td>
+                                            </tr>
+                                            <tr class="text-start">
+                                                <td>Created</td>
+                                                <td>: <?= date('d M Y', strtotime($edit->created_at)) ?? '-' ?></td>
+                                            </tr>
+                                        </table>
+                                        <div class="text-center mt-5">
+                                            <a href="?mode=edit" class="btn btn-primary rounded-pill px-4">Edit Profile</a>
+                                        </div>
+                                    </div>
+                                <?php endif;?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mc-col">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?= $this->partial('shared/footer') ?>
+<?= $this->meta->foot($meta['foot']) ?>
+<?= $this->partial('shared/foot') ?>
+</body>
+
+<script>
+$(".show-hide-password").click(function() {
+    var id = $(this).data('toggle');
+    var input = $('#'+id);
+    if (input.attr("type") == "password") {
+        var html = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">' +
+                    '<path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>' +
+                    '<path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>' +
+                    '<path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>' +
+                    '</svg>'
+        $('#button-addon-'+id).html(html);
+        input.attr("type", "text");
+    } else {
+        var html = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#828282" class="bi bi-eye" viewBox="0 0 16 16">' +
+                    '<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>' +
+                    '<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>' +
+                    '</svg>'
+        $('#button-addon-'+id).html(html);
+        input.attr("type", "password");
+    }
+});
+
+$('input[type=file]').change('#imgProfile', function (e) {
+      e.preventDefault()
+      const base_uri = "<?= $this->config->app->api->host ?>";
+      var disparent = $(this).parents(".imageRow");
+      const files = $(this).prop('files')[0];
+      var form = $('#imgProfile')[0];
+      var target = this;
+      let formData = new FormData();
+      formData.append('files', files)
+      formData.append('disk', 'cloud')
+      if (this.files.length > 0) {
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        })
+
+        $.ajax({
+            type: 'POST',
+            url: "<?= $this->router->to('siteUploadImage') ?>",
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: formData,
+            success: function(data){
+              var response = $.parseJSON(data);
+              $('.imgURL').val(base_uri+response.data.url)
+              $('.getAva').attr('src', base_uri+response.data.url)
+            }
+        })
+
+        .fail(function (data) {
+            var message = data.statusText;
+            if(message) alert(message);
+            else alert('Failed to upload image, please try again')
+        });  
+      }
+    });
+</script>
+</html>

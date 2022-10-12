@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IFEL</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= $this->asset('css/jquery.bxslider.css') ?>">
+    <link rel="stylesheet" href="<?= $this->asset('css/marquee.css') ?>">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="<?= $this->asset('js/jquery.bxslider.js') ?>"></script>
+    <script src="<?= $this->asset('js/marquee.js') ?>"></script>
+    <style>
+        body{padding:0;margin:0;overflow:hidden;background:url('<?= $this->asset('img/ledbg.png') ?>');color:#333;}
+        span,img{float:left;}
+        span{font-size:25px;margin:5px;}
+        .score img{margin-top:8px;}
+        .score {
+            font-family: 'Major Mono Display', monospace;
+            color:#fff;
+            margin: 0px 0px 0px 5px;
+
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            $('.slider').bxSlider({
+                auto: true,
+                mode: 'fade',
+                speed: 500,
+                pause: 3000,
+                autoHover: false,
+                controls:false
+            });
+        });
+        $(function (){
+            let options = {
+                autostart: true,
+                property: 'value',
+                onComplete: null,
+                duration: 20000,
+                padding: 50,
+                marquee_class: '.marquee',
+                container_class: '.simple-marquee-container',
+                sibling_class: 0,
+                hover: true,
+                velocity: 0.03,
+                direction: 'left'
+            }
+            $('.simple-marquee-container').SimpleMarquee(options);
+            //$('.simple-marquee-container').SimpleMarquee();
+        });
+    </script>
+</head>
+
+<body style="padding:0;">
+
+<!-- Stadium Big Screen -->
+
+<iframe width="400" height="185" src="<?= $match->virtual_stadium->embed ?>?controls=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen></iframe>
+
+<!-- Stadium Stadium Side Banner -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<?php
+    $upload_form = null;
+    if(isset($field->form))
+        $upload_form = $field->form;
+    elseif(isset($rules->upload) && is_string($rules->upload))
+        $upload_form = $rules->upload;
+
+    $l_id = $id . '-action';
+    
+    $t_attrs = [
+        'id'    => $id,
+        'name'  => $field->name,
+        'class' => 'formgallery-model'
+    ];
+    if(isset($rules->required) && $rules->required)
+        $t_attrs['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $t_attrs['required'] = null;
+
+    $d_attrs = [
+        'class' => 'formgallery',
+        'id'    => $id . '-container',
+        'data-model' => '#' . $id,
+        'data-form'  => ''
+    ];
+    if($upload_form){
+        $d_attrs['data-form'] = $upload_form;
+        $mimes = $this->config->libUpload->forms->$upload_form->mime ?? NULL;
+        if($mimes)
+            $d_attrs['data-accept'] = implode(',', $mimes);
+    }
+
+    if($value && ( is_object($value) || is_array($value)))
+        $value = json_encode($value);
+?>
+<div class="form-group<?= ($error ? ' is-invalid' : '' ) ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $l_id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <textarea<?= to_attr($t_attrs) ?>><?= $value ?></textarea>
+    <div<?= to_attr($d_attrs) ?>>
+        <div class="formgallery-list formgallery-list-four">
+            <?php
+            $value = json_decode($value);
+            if(is_array($value)): ?>
+                <?php foreach($value as $val): ?>
+                    <div class="formgallery-item">
+                        <button type="button" class="close formgallery-remove" aria-label="Close" title="Remove">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <a href="#" class="formgallery-image" style="background-image: url(<?= hs($val) ?>)">
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+        <button class="btn btn-light formgallery-action" type="button" id="<?= $l_id ?>">
+            Add Image
+        </button>
+    </div>
+
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

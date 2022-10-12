@@ -1,0 +1,22 @@
+<div class="navbar-main-spacer"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Error 500</h1>
+            <p><?= hs($message) ?></p>
+            <p><a href="#" onclick="history.back()">Back</a></p>
+            <?php if(is_dev() && $traces): ?>
+                <h3>Trace</h3>
+                <ul>
+                    <?php foreach($traces as $trace): ?>
+                        <li>
+                            <?= $trace['file'] ?>
+                            ( <?= $trace['line'] ?> )
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>

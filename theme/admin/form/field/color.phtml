@@ -1,0 +1,27 @@
+<?php
+    $attrs = [
+        'type'        => 'text',
+        'class'       => 'form-control',
+        'placeholder' => $field->label,
+        'id'          => $id,
+        'value'       => ($value ?? ''),
+        'name'        => $field->name
+    ];
+
+    if(isset($rules->required) && $rules->required)
+        $attrs['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $attrs['required'] = null;
+?>
+<div class="form-group<?= ($error?' is-invalid':'') ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <div class="input-group">
+        <input<?= to_attr($attrs) ?>>
+        <div class="input-group-append">
+            <input type="color" class="btn btn-outline-secondary picker-color" data-input="#<?= $id ?>" value="<?= ($value??'') ?>">
+        </div>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

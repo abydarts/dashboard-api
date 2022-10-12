@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <?= $this->partial('shared/head', ['_meta'=>$_meta]) ?>
+</head>
+<body>
+    <?= $this->partial('shared/header') ?>
+    <div class="navbar-main-spacer"></div>
+    <?= $content ?>
+    <?= $this->partial('shared/footer') ?>
+    
+    <?= $this->partial('shared/foot', ['_meta'=>$_meta]) ?>
+</body>
+</html>

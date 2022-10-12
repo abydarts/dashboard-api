@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <?= $this->meta->head($meta['head']) ?>
+    <?= $this->partial('shared/head') ?>
+</head>
+<body>
+<?php
+$this->partial('shared/header');
+?>
+
+<main>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="mc-col py-4 m-0 mb-5">
+                        <div class="mc-card widget-profile">
+                            <div class="cover-image"></div>
+                            <div class="avatar"><img src="<?= $this->profile->avatar?>"></div>
+                            <div class="profile-text">
+                                <div class="profile-name"><?= $this->profile->name ?></div>
+                            </div>
+                            <div class="wallets">
+                                <?php if($this->req->getQuery('mode') == 'edit') :?>
+                                <div>
+                                    <form method="post">
+                                        <?= $form->csrfField('noob') ?>
+                                        <div class="mb-3">
+                                            <label for="input-userid" class="form-label text-secondary">Nama Penerima</label>
+                                            <input type="text" name="name" class="form-control form-control-lg" placeholder="Name" value="<?= $address->name ?? '' ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="iaddress" class="form-label text-secondary">Alamat</label>
+                                            <textarea id="address" name="address" class="form-control form-control-lg" placeholder="Alamat">
+                                                <?= $address->address ?? '' ?>
+                                            </textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="state" class="form-label text-secondary">Provinsi</label>
+                                            <input id="state" type="text" name="state" class="form-control form-control-lg" placeholder="Provinsi" value="<?= $address->state ?? '' ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="postal_code" class="form-label text-secondary">Kode Pos</label>
+                                            <input id="postal_code" type="text" name="postal_code" class="form-control form-control-lg" placeholder="Kode Pos" value="<?= $address->postal_code ?? '' ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="phone" class="form-label text-secondary">Nomor Telepon</label>
+                                            <input id="phone" type="text" name="phone" class="form-control form-control-lg" placeholder="Nomor Telepon" value="<?= $address->phone ?? '' ?>">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-success rounded-pill py-3 w-100">Simpan</button>
+                                    </form>
+                                </div>
+                                <?php else :?>
+                                    <div>
+                                        <table>
+                                            <tr class="text-start">
+                                                <td class=" ms-3" width="130px">Nama Penerima</td>
+                                                <td>: <?= $address->name ?? '-' ?></td>
+                                            </tr>
+                                            <tr class="text-start">
+                                                <td>Alamat</td>
+                                                <td>: <?= $address->address ?? '-' ?></td>
+                                            </tr>
+                                            <tr class="text-start">
+                                                <td>Provinsi</td>
+                                                <td>: <?= $address->state ?? '-' ?></td>
+                                            </tr>
+                                            <tr class="text-start">
+                                                <td>Kode Pos</td>
+                                                <td>: <?= $address->postal_code ?? '-' ?></td>
+                                            </tr>
+                                            <tr class="text-start">
+                                                <td>No. Telepon</td>
+                                                <td>: <?= $address->phone ?? '-' ?></td>
+                                            </tr>
+                                        </table>
+                                        <div class="text-center my-3">
+                                            <a href="?mode=edit" class="btn btn-primary rounded-pill px-4">Edit Address</a>
+                                        </div>
+                                    </div>
+                                <?php endif;?>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="mc-col">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?= $this->partial('shared/footer') ?>
+<?= $this->meta->foot($meta['foot']) ?>
+<?= $this->partial('shared/foot') ?>
+</body>
+</html>

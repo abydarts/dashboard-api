@@ -1,0 +1,94 @@
+<main>
+    <section class="main-container bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 offset-lg-3">
+                    <div class="mc-col">
+                        <div class="row mb-4">
+                            <div class="wizard-store" id="wizard-store">
+                                <h3 class="text-primary fw-bold">Metode Pembayaran</h3>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12">
+                                            <div class="mt-2 mb-3 text-muted">Silahkan pilih metode pembayaran yang Anda inginkan</div>
+                                        </div>
+                                        <div class="col-12 col-lg-12">
+                                            <div class="accordion" id="accordionMethod">
+
+                                                <div class="accordion-item d-none">
+                                                    <h2 class="accordion-header ws-method" id="headingOne">
+                                                        <button class="accordion-button border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                            <ion-icon name="wallet" size="large" class="align-middle text-primary me-2"></ion-icon> Uang Elektronik
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseOne" class="accordion-collapse collapse show mb-3" aria-labelledby="headingOne" data-bs-parent="#accordionMethod">
+                                                        <div class="accordion-body p-0 bg-transparent border-0">
+                                                            <ul>
+                                                                <?php foreach($channels as $channel) :?>
+                                                                <?php if($channel->category == 'E-Wallet') :?>
+                                                                <li>
+                                                                    <form method="post" action="<?= $this->router->to('sitePaymentTopupCoin')?>">
+                                                                        <?= $form->csrfField('noob') ?>
+                                                                        <input type="hidden" name="coin" value="<?= $coin?>">
+                                                                        <input type="hidden" name="channel" value="<?= $channel->code ?>">
+                                                                        <button type="submit" class="card rounded-5 mb-2 w-100">
+                                                                            <div class="p-3 d-flex justify-content-between align-items-center">
+                                                                                <div class="text-dark">
+                                                                                    <img src="<?= $channel->icon_url ?>" width="50px" class="align-middle me-3">
+                                                                                    <span><?= $channel->title ?></span>
+                                                                                </div>
+                                                                                <ion-icon name="chevron-forward-outline" class="text-secondary"></ion-icon>
+                                                                            </div>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                                <?php endif;?>
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+<!--                                                <div class="accordion-item">-->
+<!--                                                    <h2 class="accordion-header ws-method" id="headingThree">-->
+<!--                                                        <button class="accordion-button border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">-->
+<!--                                                            <ion-icon name="business" size="large" class="align-middle text-primary me-2"></ion-icon> Bank Transfer-->
+<!--                                                        </button>-->
+<!--                                                    </h2>-->
+<!--                                                    <div id="collapseThree" class="accordion-collapse collapse mb-3" aria-labelledby="headingThree" data-bs-parent="#accordionMethod">-->
+<!--                                                        <div class="accordion-body p-0 bg-transparent border-0">-->
+                                                            <ul>
+                                                                <?php foreach($channels as $channel) :?>
+                                                                <li>
+                                                                    <form method="post" action="<?= $this->router->to('sitePaymentTopupCoin')?>">
+                                                                        <?= $form->csrfField('noob') ?>
+                                                                        <input type="hidden" name="coin" value="<?= $coin?>">
+                                                                        <input type="hidden" name="channel" value="<?= $channel->code ?>">
+                                                                        <button type="submit" class="card rounded-5 mb-2 w-100">
+                                                                            <div class="p-3 d-flex justify-content-between align-items-center">
+                                                                                <div class="text-dark">
+                                                                                    <img src="<?= $channel->icon_url ?>" width="50px" class="align-middle me-3">
+                                                                                    <span><?= $channel->title ?></span>
+                                                                                </div>
+                                                                                <ion-icon name="chevron-forward-outline" class="text-secondary"></ion-icon>
+                                                                            </div>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                                <?php endforeach; ?>
+                                                            </ul>
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

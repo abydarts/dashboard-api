@@ -1,0 +1,32 @@
+<?php $sidebar_flat = \AdminUi\Library\Menu::getFlatSidebar($_meta); ?>
+<?php $sidebar_tree = \AdminUi\Library\Menu::getTreeSidebar($_meta); ?>
+
+<?php if($sidebar_flat || $sidebar_tree): ?>
+<div class="drawer drawer-left slide" tabindex="-1" role="dialog" aria-hidden="true" id="drawer-main">
+    <div class="drawer-content drawer-content-scrollable" role="document">
+        <div class="drawer-header">
+            <div class="form-group">
+                <input type="search" class="form-control" placeholder="Search" id="drawer-main-filter">
+            </div>
+        </div>
+        <div class="drawer-body p-0">
+            
+            <div class="list-group list-group-flush list-group-no-border" id="drawer-main-search" style="display:none">
+                <?php if($sidebar_flat): ?>
+                    <?php foreach($sidebar_flat as $menu): ?>
+                        <?php if(!$menu->filterable) continue; ?>
+                        
+                        <a href="<?= hs($menu->link) ?>" class="list-group-item list-group-item-action" data-text="<?= hs($menu->label) ?>">
+                            <div class="list-group-item-label"><?= hs($menu->label) ?></div>
+                            <small><?= hs($menu->bcumb) ?></small>
+                        </a>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+            <div class="vertical-menu vertical-menu-light" id="drawer-main-menu">
+                <?= $this->partial('shared/sidebar-menu__tree', ['menus'=>$sidebar_tree, 'index'=>0]) ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,49 @@
+<?php
+    $i_attrs = [
+        'type'        => 'text',
+        'class'       => 'form-control',
+        'placeholder' => $field->label,
+        'id'          => $id,
+        'name'        => $field->name,
+        'value'       => $value
+    ];
+    $b_attrs = [
+        'class'         => 'btn btn-outline-secondary fileurl-picker',
+        'id'            => $id . '-btn',
+        'type'          => 'button',
+        'data-toggle'   => 'fileurl',
+        'data-target'   => '#' . $id
+    ];
+
+    if(isset($rules->required) && $rules->required)
+        $i_attrs['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $i_attrs['required'] = null;
+
+    $upload_form = null;
+    if(isset($field->form))
+        $upload_form = $field->form;
+    elseif(isset($rules->upload) && is_string($rules->upload))
+        $upload_form = $rules->upload;
+
+    if($upload_form){
+        $b_attrs['data-form'] = $upload_form;
+        $mimes = $this->config->libUpload->forms->$upload_form->mime ?? NULL;
+        if($mimes)
+            $b_attrs['data-accept'] = implode(',', $mimes);
+    }
+?>
+<div class="form-group<?= ($error ? ' is-invalid' : '' ) ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <div class="input-group">
+        <input<?= to_attr($i_attrs) ?>>
+        <div class="input-group-append">
+            <button<?= to_attr($b_attrs) ?>>
+                <i class="fas fa-upload"></i>
+            </button>
+        </div>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

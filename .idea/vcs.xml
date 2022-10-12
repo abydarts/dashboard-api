@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.tmp/admin-slideshow" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.tmp/banner" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.tmp/lib-recaptcha" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.tmp/lib-user-perm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.tmp/mim-team" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.tmp/site-contact" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.tmp/site-post-index" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.tmp/static-page" vcs="Git" />
+  </component>
+</project>

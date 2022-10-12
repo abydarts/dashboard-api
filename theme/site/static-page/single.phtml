@@ -1,0 +1,22 @@
+<main>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="mc-col">
+                        <div class="mc-title flex-column align-items-start">
+                            <h1 class="text-primary mb-2"><?= $page->title->safe ?></h1>
+                            <div class="text-muted">
+                                <span class="me-3"><?= ucwords($page->user->fullname) ?></span>
+                                <span><?= $page->created->format('D, d M Y H:i') ?> WIB</span>
+                            </div>
+                        </div>
+                        <div class="mc-content">
+                            <?= ($page->content) ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

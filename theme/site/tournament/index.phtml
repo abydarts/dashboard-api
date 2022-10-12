@@ -1,0 +1,74 @@
+<main>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="mc-col">
+                        <div class="mc-title">
+                            <h2>Tournament</h2>
+                            <div class="position-relative">
+                                <span class="position-absolute left-0 h-100 input-group-text bg-transparent border-0"
+                                      id="search-input"><ion-icon name="search-outline"></ion-icon></span>
+                                <input type="text" class="form-control ps-5" placeholder="Search tournament"
+                                       aria-label="Search tournament" aria-describedby="search-input">
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <?php if (isset($tournaments) && count($tournaments) > 0) : ?>
+                                <?php foreach ($tournaments as $tour) : ?>
+                                    <div class="col-12">
+                                        <a href="<?= $this->router->to('siteTournamentSingle', ['id' => $tour->id]) ?>"
+                                           class="media-list bg-gray rounded-5">
+                                            <div class="box-thumb">
+                                                <img src="<?= (empty($tour->flag) ? $this->asset('/img/post/image-thumbnail.jpg') : $tour->flag) ?>"
+                                                     class="" alt="<?= $tour->name ?>">
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="ml-title">
+                                                    <div class="ml-left">
+                                                        <h5 class="title"><?= ucwords($tour->name) ?></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6 col-lg-1">
+                                                        <div>Harga</div>
+                                                        <div class="fw-bold"><?= $tour->price == 0 ? 'Gratis' : $tour->price ?></div>
+                                                    </div>
+                                                    <div class="col-6 col-lg-1">
+                                                        <div>Slot</div>
+                                                        <div class="fw-bold"><?= $tour->teams_count ?>/<?= $tour->open_slot ?></div>
+                                                    </div>
+                                                    <div class="col-6 col-lg-2">
+                                                        <div>Kick Off</div>
+                                                        <div class="fw-bold"><?= date('d M Y', strtotime($tour->start_date) )  ?></div>
+                                                    </div>
+                                                    <div class="col-6 col-lg-2">
+                                                        <div>Waktu</div>
+                                                        <div class="fw-bold"><?= date('H:i', strtotime($tour->start_date) )  ?> WIB</div>
+                                                    </div>
+                                                    <div class="col-6 col-lg-2">
+                                                        <div>Ditutup pada</div>
+                                                        <div class="fw-bold"><?= date('d M Y H:i', strtotime($tour->close_date) )  ?> WIB</div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-4">
+                                                        <div class="price-title">Hadiah</div>
+                                                        <div class="price">
+                                                            Rp<?= number_format($tour->grand_prize) ?></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <div class="col-12 text-center">
+                                    <p>There is no tournament yet.</p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

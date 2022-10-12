@@ -1,0 +1,43 @@
+<main>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="mc-col py-4 m-0">
+                        <div class="mc-title align-items-center border-0 m-0">
+                            <a href="<?= $this->router->to('siteProfileSingle') ?>" class="btn text-primary position-absolute"><ion-icon name="arrow-back-outline" size="large"></ion-icon></a>
+                            <h2 style="flex-basis: 100%;text-align: center;">Top Up</h2>
+                        </div>
+                    </div>
+                    <div class="mc-col">
+                        <div class="mc-tabs">
+                            <a href="#" class="w-50 text-center active"><h2>Saldo</h2></a>
+                            <a href="<?= $this->router->to('sitePaymentHistory')?>" class="w-50 text-center"><h2>History</h2></a>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-success text-center" role="alert">
+                                    Saldo: <?= number_format($this->profile->getCoinBalance()) ?>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <?php foreach($list as $value) :?>
+                                <form method="post">
+                                    <?= $form->csrfField('noob') ?>
+                                    <input type="hidden" name="coin" value="<?= $value ?>">
+                                    <button type="submit" class="card bg-gray border-0 rounded-5 mb-2 w-100">
+                                        <div class="p-3 d-flex justify-content-between align-items-center">
+                                            <div class="text-dark"><?= number_format($value) ?></div>
+                                            <ion-icon name="chevron-forward-outline" class="text-secondary"></ion-icon>
+                                        </div>
+                                    </button>
+                                </form>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

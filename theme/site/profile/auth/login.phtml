@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <?= $this->meta->head($meta['head']) ?>
+    <?= $this->partial('shared/head') ?>
+</head>
+<body>
+<?php
+$this->partial('shared/header');
+?>
+
+<main>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4 bg-light order-2 order-lg-1">
+                    <div class="mc-col text-center py-5 m-0">
+                        <div class="mc-title justify-content-center border-0">
+                            <h2 class="text-center">Hello, Player!</h2>
+                        </div>
+                        <p class="text-secondary">Join us and start competing with other players around the nation. Unleash your skill!</p>
+                        <a href="<?= $this->router->to('siteProfileSignup') ?>" class="btn btn-outline-primary rounded-pill px-4">Sign Up</a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8 order-1 order-lg-2">
+                    <div class="mc-col py-5 m-0">
+                        <div class="mc-title flex-column align-items-start border-0">
+                            <h2>Sign in to IFel</h2>
+                            <?php if($error): ?>
+                                <?php if($error_message == 'For security reason we just reset your password. Please check your email to update your password and user detail.') :?>
+                                    <div class="alert alert-info mt-3">
+                                <?php else:?>
+                                    <div class="alert alert-danger mt-3">
+                                        <strong>Whoops!</strong>
+                                <?php endif;?>
+                                    <?= $error_message ?? 'Your credentials is invalid or not found'?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row auth-form">
+                            <form method="POST">
+                                <?= $form->csrfField('noob') ?>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <input type="email" name="email" class="form-control" placeholder="Email*" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <input type="password" name="password" class="form-control" placeholder="Password*" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <a href="<?= $this->router->to('siteProfileRecovery') ?>" class="btn-link text-primary">Forgot Password?</a>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="cta">
+                                        <button type="submit" class="btn btn-primary rounded-pill px-5">Sign in</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?= $this->partial('shared/footer') ?>
+<?= $this->meta->foot($meta['foot']) ?>
+<?= $this->partial('shared/foot') ?>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title><?= $contact->subject->safe ?></title>
+</head>
+<body style="background-color:#eee">
+    <div style="background-color:white;margin:20px auto;max-width:750px;padding:50px;">
+        <div>Hi Admin ( <?= \Mim::$app->config->host ?> ),</div>
+        <p><?= $contact->fullname->safe ?> ( <?= $contact->email->safe ?> ) just send you message from your site <?= \Mim::$app->config->host ?> contact page. Please see below for the message details:</p>
+
+        <div style="background-color:rgba(0,0,0,.05);padding:40px;">
+            <h3 style="margin-top:0;"><?= $contact->subject->safe ?></h3>
+            <p><?= nl2br($contact->content->safe) ?></p>
+        </div>
+
+        <p>
+            You can reply directly to the sender email address as seen above
+            <?php if($next): ?>
+                or <a href="<?= $next ?>">click this link</a> to reply from your admin page
+            <?php endif; ?>
+        </p>
+        
+        <hr>
+
+        <div style="text-align:center">
+            <?= date('Y') ?> &middot; <?= \Mim::$app->config->name ?>
+        </div>
+    </div>
+</body>
+</html>

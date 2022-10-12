@@ -1,0 +1,70 @@
+<main>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="mc-col">
+                        <div class="row mb-4">
+                            <div class="col-12 col-lg-6">
+                                <div class="product-slider mb-3">
+                                    <div><img src="<?= $product->image ?>"></div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="product-desc">
+                                    <h1><?= $product->name ?></h1>
+                                    <h3><?= number_format($product->price) ?> Points</h3>
+                                    <div class="product-form">
+                                        <form>
+                                            <?php if(isset($product->meta->size)):?>
+                                            <div class="mb-3">
+                                                <label class="form-label">Select size</label>
+                                                <div class="d-flex">
+
+                                                    <?php foreach($product->meta->size as $size) :?>
+                                                        <label class="checkbox-styled checkbox-circle">
+                                                            <input type="checkbox" name="size" value="<?= $size ?>" />
+                                                            <span><?= $size ?></span>
+                                                        </label>
+                                                    <?php endforeach; ?>
+
+                                                </div>
+                                            </div>
+                                            <?php endif; ?>
+                                            <?php if(isset($product->meta->color)):?>
+                                            <div class="mb-3">
+                                                <label class="form-label">Select color</label>
+                                                <div class="d-flex">
+
+                                                    <?php foreach($product->meta->color as $color) :?>
+                                                    <label class="checkbox-styled checkbox-pill">
+                                                        <input type="checkbox" name="color" value="<?= $color ?>" />
+                                                        <span><?= $color ?></span>
+                                                    </label>
+                                                    <?php endforeach; ?>
+
+                                                </div>
+                                            </div>
+                                            <?php endif; ?>
+                                            <div class="d-grid mb-3 gap-2">
+                                                <?php if($this->profile->isLogin()) :?>
+                                                    <a href="<?= $this->router->to('siteStoreRedeem', ['id' => $product->id])?>" id="sidebarBtnOpen" class="btn btn-primary btn-lg rounded-pill">Tukar Point</a>
+                                                <?php else :?>
+                                                    <button id="sidebarBtnOpen" class="btn btn-primary btn-lg rounded-pill" onclick="alert('Please login first!')">Tukar Point</button>
+                                                <?php endif; ?>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <h5>Deskripsi Produk</h5>
+                                        <p><?= $product->description ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

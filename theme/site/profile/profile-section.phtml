@@ -1,0 +1,33 @@
+<div class="mc-col py-4 m-0 mb-5">
+    <div class="mc-card widget-profile">
+        <div class="cover-image"></div>
+        <div class="avatar"><img src="<?= $this->profile->avatar?>"></div>
+        <div class="profile-text">
+            <div class="profile-name"><?= $this->profile->name ?></div>
+        </div>
+        <div class="wallets">
+            <div class="wallet-item">
+                <div class="mb-1">Coin</div>
+                <div><?= number_format($this->profile->getCoinBalance()) ?></div>
+            </div>
+            <div class="wallet-item">
+                <div class="mb-1">Poin</div>
+                <div><?= number_format($this->profile->point) ?></div>
+            </div>
+        </div>
+        <div class="cta">
+            <div class="cta-item">
+                <a href="<?= $this->router->to('sitePaymentTopup') ?>">
+                    <div class="mb-1"><img src="<?= $this->asset('img/icon/purchase-coin-icon.svg') ?>"></div>
+                    <div class="text-secondary">Beli Coin</div>
+                </a>
+            </div>
+            <div class="cta-item">
+                <a href="<?= $this->router->to('siteStoreIndex') ?>">
+                    <div class="mb-1"><img src="<?= $this->asset('img/icon/redeem-poin-icon.svg') ?>"></div>
+                    <div class="text-secondary">Rewards</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

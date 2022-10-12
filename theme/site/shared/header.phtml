@@ -1,0 +1,65 @@
+<header id="header" class="navbar-ifel">
+    <div class="container">
+        <div class="">
+            <div class="navbar-brand">
+                <div class="d-flex align-items-center">
+                    <button type="" class="menu-btn me-2"><ion-icon name="menu-outline" class="icon-700 text-primary"></ion-icon></button>
+                    <a href="<?= $this->router->to('siteHome') ?>"><img src="<?= $this->asset('img/logo.png') ?>"></a>
+                </div>
+                <div class="d-flex align-items-center">
+                    <?php if(!$this->profile->isLogin()) : ?>
+                    <a href="<?= $this->router->to('siteProfileLogin') ?>" class="btn btn-outline-primary rounded-pill px-4 me-2">Login</a>
+                    <a href="<?= $this->router->to('siteProfileSignup') ?>" class="btn btn-warning rounded-pill px-4">Register</a>
+                    <?php else : ?>
+                        <a href="<?= $this->router->to('siteNotificationIndex') ?>" class="btn-auth position-relative btn d-flex align-items-center me-3">
+                            <ion-icon name="notifications" size="large" class="text-primary"></ion-icon>
+                            <?php if(isset($notification_unread) && $notification_unread != 0) :?>
+                            <span class="text-secondary position-absolute badge bg-danger text-white end-0 rounded-pill" style="font-size: 10px;">1</span>
+                            <?php endif; ?>
+                        </a>
+                        <div class="dropdown">
+                            <a href="#" class="btn-auth dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="avatar"><ion-icon name="person-outline" role="img" class="md hydrated" aria-label="person outline"></ion-icon></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="margin: 0px;">
+                                <li><a class="dropdown-item" href="<?= $this->router->to('sitePaymentTopup')?>">Top Up</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="<?= $this->router->to('siteProfileSingle')?>">My Profile</a></li>
+                                <li><a class="dropdown-item" href="<?= $this->router->to('siteProfileEdit')?>">Settings</a></li>
+                                <li><a class="dropdown-item" href="<?= $this->router->to('siteProfileAddress')?>">My Address</a></li>
+                                <li><a class="dropdown-item" href="<?= $this->router->to('sitePaymentHistory')?>">Coin History</a></li>
+                                <li><a class="dropdown-item" href="<?= $this->router->to('sitePointHistory')?>">Point History</a></li>
+                                <li><a class="dropdown-item" href="<?= $this->router->to('siteRewardIndex')?>">My Rewards</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="<?= $this->router->to('siteProfileLogout' ) ?>"><ion-icon name="exit-outline" role="img" class="md hydrated me-2" aria-label="exit outline"></ion-icon> Logout</a></li>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-bar">
+        <div class="container">
+            <div class="row">
+                <div class="logo-white d-block d-sm-none">
+                    <img src="<?= $this->asset('img/logo-white.png') ?>">
+                </div>
+                <ul>
+                    <li>
+                        <a href="<?= $this->router->to('siteHome') ?>" class="<?= $this->req->route->name == 'siteHome' ? 'active': ''?>">Home</a>
+                        <a href="<?= $this->router->to('siteLeagueSingle', ['id' =>1])?>">eLeague 1</a>
+                        <a href="<?= $this->router->to('siteLeagueSingle', ['id' =>2])?>">eLeague 2</a>
+                        <a href="<?= $this->router->to('siteLeagueSingle', ['id' =>10])?>">Grand Final</a>
+                        <a href="<?= $this->router->to('siteTournamentIndex')?>">Tournament</a>
+                        <a href="<?= $this->router->to('sitePostIndex') ?>" class="<?=  strpos($this->req->path, 'post') ? 'active': ''?>">News</a>
+                        <a href="<?= $this->router->to('siteStoreIndex') ?>">Store</a>
+                        <a href="<?= $this->router->to('siteGamesIndex') ?>">Games</a>
+                        <a href="<?= $this->router->to('siteStaticPageSingle', ['slug' => 'faq']) ?>">FAQ</a>
+                        <a href="<?= $this->router->to('siteContact') ?>">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

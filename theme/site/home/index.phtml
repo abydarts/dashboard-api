@@ -1,0 +1,123 @@
+<main>
+    <section class="banner-slider">
+        <?php foreach($slides->images as $img):?>
+            <div><a href="<?= $img->action ?>" target="_blank"><img loading="lazy" src="<?= $img->url ?>"></a></div>
+        <?php endforeach;?>
+    </section>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="mc-col">
+                        <div class="mc-title">
+                            <h2>Live Match</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <?php if(count($live_matches) > 0) :?>
+                                <?php foreach ($live_matches as $match):?>
+                                    <a href="<?= $this->router->to('siteMatchSingle', ['id' => $match->id])?>" class="livematch-list">
+                                        <div class="lm-left">
+                                            <div class="text-center me-3">
+                                                <div class="btn btn-outline-danger rounded-pill py-0 mb-2">Live</div>
+                                                <div class="text-danger"><?= get_minute_diff($match->closing_date) ?> Min</div>
+                                            </div>
+                                            <div class="lm-versus">
+                                                <div class="d-flex fw-bold">
+                                                    <span><img loading="lazy" src="<?= $match->home->flag ?>" width="20px" class="align-middle mx-2"></span>
+                                                    <span class="lm-name"><?= $match->home->name ?></span>
+                                                </div>
+                                                <div class="d-flex fw-bold">
+                                                    <span><img loading="lazy" src="<?= $match->away->flag ?>" width="20px" class="align-middle mx-2"></span>
+                                                    <span class="lm-name"><?= $match->away->name ?></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="lm-right">
+                                            <div class="btn btn-primary rounded-pill">Virtual Stadion</div>
+                                        </div>
+                                    </a>
+                                <?php endforeach;?>
+                                <?php else:?>
+                                <div class="text-center">
+                                    <small>Currently there is no live match</small>
+                                </div>
+                                <?php endif;?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mc-col">
+                        <div class="mc-title">
+                            <h2>Upcoming Match</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <?php if(count($upcoming_matches) > 0) :?>
+                                <?php foreach ($upcoming_matches as $match):?>
+                                    <a href="<?= $this->router->to('siteMatchSingle', ['id' => $match->id])?>" class="livematch-list">
+                                        <div class="lm-left">
+                                            <div class="lm-versus">
+                                                <div class="d-flex fw-bold">
+                                                    <span><img loading="lazy" src="<?= $match->home->flag ?>" width="20px" class="align-middle mx-2"></span>
+                                                    <span class="lm-name"><?= $match->home->name ?></span>
+                                                </div>
+                                                <div class="d-flex fw-bold">
+                                                    <span><img loading="lazy" src="<?= $match->away->flag ?>" width="20px" class="align-middle mx-2"></span>
+                                                    <span class="lm-name"><?= $match->away->name ?></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="lm-right">
+                                            <div class="btn btn-primary rounded-pill">Watch Match</div>
+                                        </div>
+                                    </a>
+                                <?php endforeach;?>
+                                <?php else:?>
+                                <div class="text-center">
+                                    <small>Currently there is no upcoming match</small>
+                                </div>
+                                <?php endif;?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mc-col">
+                        <div class="mc-title">
+                            <h2>Latest News</h2>
+                            <a href="<?= $this->router->to('sitePostIndex') ?>" class="btn-arrow">Lihat semua</a>
+                        </div>
+                        <div class="row">
+                            <?php $now = new \DateTime('now') ?>
+                            <?php if (count($posts) > 0) : ?>
+                                <?php foreach($posts as $post): ?>
+                                    <div class="col-12 col-lg-6">
+                                        <a href="<?= $post->page ?>" class="btn-card">
+                                            <div class="card border-0 mb-4">
+
+                                                <div class="ratio ratio-16x9"><img src="<?= empty($post->cover->url) ? $this->asset('/img/post/image-thumbnail.jpg') : $post->cover->url  ?>" class="card-img-top" alt="<?= $post->cover->label ?>"></div>
+                                                <div class="mc-label">
+                                                    <?php if($post->category): ?>
+                                                        <?php foreach($post->category as $cat): ?>
+                                                            <span class="badge bg-black px-3 rounded-pill"><?= $cat->name ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div class="card-body bg-light position-relative">
+                                                    <h5 class="card-title"><?= $post->title ?></h5>
+                                                    <p class="card-text"><small class="text-muted"><?= $post->published->format('Y-m-d H:i:s') ?></small></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <small class="text-center">No post yet</small>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <?= $sidebar_content ?>
+            </div>
+        </div>
+    </section>
+
+</main>

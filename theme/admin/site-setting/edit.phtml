@@ -1,0 +1,40 @@
+<?php $can_edit = $this->can_i->update_site_setting; ?>
+<nav class="navbar navbar-expand-lg navbar-light bg-white navbar-shadow">
+    <div class="navbar-multiline mr-auto">
+        <span class="navbar-brand" href="#0"><?= hs($group->name) ?> Preferences</span>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= $this->router->to('adminHome') ?>">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?= $this->router->to('adminSetting') ?>">Setting</a></li>
+                <li class="breadcrumb-item">
+                    <a href="<?= $this->router->to('adminSiteSettingSingle', ['group'=>$group->name]) ?>">
+                        <?= hs($group->name) ?>
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page"><?= hs($item->name) ?></li>
+            </ol>
+        </nav>
+    </div>
+</nav>
+
+<div class="container p-3">
+    <div class="row">
+        <div class="col-md-5">
+            <?= $this->partial('site-setting/menu__items', ['items'=>$items, 'active'=>$item->id, 'filterid'=>null]) ?>
+        </div>
+        <div class="col-md-7">
+            <form method="POST" class="card needs-validation main" novalidate>
+                <div class="card-header">
+                    <?= hs($item->name) ?>
+                    <div class="float-right">
+                        <button class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <?= $form->csrfField('noob') ?>
+                    <?= $form->field('value') ?>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

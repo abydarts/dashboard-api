@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white navbar-shadow">
+    <div class="navbar-multiline mr-auto">
+        <span class="navbar-brand" href="#0">League Manage Team</span>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= $this->router->to('adminHome') ?>">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?= $this->router->to('adminLeague') ?>">League</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><?= $subtitle ?></li>
+            </ol>
+        </nav>
+    </div>
+</nav>
+
+
+<div class="container p-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h4 class="float-left">Manage Team <?= $league->title ?></h4>
+                    <button type="button" id="add-league-team" class="btn btn-primary float-right" data-toggle="modal" data-target="#addTeamModal">Add</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <?php if($league->team): ?>
+                <ul class="list-group list-group-flush card mb-3">
+                    <?php foreach($league->team as $team): ?>
+                        <li class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">
+                                    <?= $team->name ?>
+                                </h5>
+                                <div>
+                                    <button type="button" class="btn btn-white rounded-circle btn-icon mg-l-15 remove-team-league" data-team="<?= $team->id?>" data-league="<?= $league->id?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+
+            <?php if($pages): ?>
+                <?= $this->partial('shared/pagination', ['pages'=>$pages, 'align'=>'right']); ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addTeamModal" tabindex="-1" role="dialog" aria-labelledby="addTeamModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Available Team</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php if($all_teams): ?>
+                    <ul class="list-group list-group-flush card mb-3">
+                        <?php foreach($all_teams as $team): ?>
+                            <li class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">
+                                        <?= $team->name ?>
+                                    </h5>
+                                    <div>
+                                        <button type="button" class="btn btn-white rounded-circle btn-icon mg-l-15 add-team-league" data-team="<?= $team->id?>" data-league="<?= $league->id?>">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+
+        </div>
+    </div>
+</div>

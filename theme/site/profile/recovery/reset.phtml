@@ -1,0 +1,51 @@
+<main>
+    <section class="main-container bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="mc-col">
+                        <div class="mc-title flex-column align-items-start">
+                            <h2>Reset Your Password</h2>
+                            <div class="mt-2 text-muted">Please enter your new password.</div>
+                            <?php if($errors): ?>
+                                <div class="alert alert-danger">
+                                    <h2>Error</h2>
+                                    <ol>
+                                        <?php foreach($errors as $error): ?>
+                                            <li><?= $error->text ?></li>
+                                        <?php endforeach; ?>
+                                    </ol>
+                                </div>
+                            <?php endif; ?>
+                            <?php if($error): ?>
+                                <div class="alert alert-danger">
+                                    <h2>Error</h2>
+                                    <div><?=$error_message?></div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="row mb-4 sponsorship-form">
+                            <form method="POST">
+                                <?= $form->csrfField('noob') ?>
+
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <input type="password" name="password" required id="fpassword" placeholder="Password" class="form-control" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <input type="password" name="re-password" required id="frepassword" placeholder="Retype Password" class="form-control">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary rounded-pill px-5">Reset</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+</main>

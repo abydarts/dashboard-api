@@ -1,0 +1,22 @@
+<?php
+    $attrs = [
+        'type'  => 'checkbox',
+        'class' => 'custom-control-input',
+        'id'    => $id,
+        'name'  => $field->name,
+        'value' => 1
+    ];
+    if($error)
+        $attrs['class'].= ' is-invalid';
+    if($value)
+        $attrs['checked'] = null;
+
+    if(isset($rules->required) && $rules->required)
+        $attrs['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $attrs['required'] = null;
+?>
+<div class="custom-control custom-checkbox">
+    <input<?= to_attr($attrs) ?>>
+    <label class="custom-control-label" for="<?= $id ?>"><?= $field->label ?></label>
+</div>

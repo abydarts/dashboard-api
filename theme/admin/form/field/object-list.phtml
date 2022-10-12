@@ -1,0 +1,37 @@
+<?php
+    $l_id = $id . '-action';
+    $t_attr = [
+        'id'    => $id,
+        'name'  => $field->name,
+        'class' => 'formfiles-model'
+    ];
+
+    if(isset($rules->required) && $rules->required)
+        $t_attr['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $t_attr['required'] = null;
+
+    $f_attr = [
+        'class'      => 'formfiles',
+        'data-model' => '#' . $id,
+        'data-object'=> $field->object
+    ];
+    if(isset($field->itemIcon))
+        $f_attr['data-icon'] = $field->itemIcon;
+
+    if(!is_string($value) && !is_null($value))
+        $value = json_encode($value);
+
+    $b_label = $field->button ?? 'Add Object';
+?>
+<div class="form-group<?= ($error ? ' is-invalid' : '' ) ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $l_id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <textarea<?= to_attr($t_attr) ?>><?= hs($value??'') ?></textarea>
+    <div<?= to_attr($f_attr) ?>>
+        <ul class="formfiles-items"></ul>
+        <button class="formfiles-btn-add btn btn-light btn-block" id="<?= $l_id ?>" type="button"><?= hs($b_label) ?></button>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

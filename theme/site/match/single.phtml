@@ -1,0 +1,176 @@
+<main>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="mc-col py-4 m-0">
+                        <div class="mc-title align-items-center border-0 m-0">
+                            <a href="javascript:history.go(-1)" class="btn text-primary"><ion-icon name="arrow-back-outline" size="large"></ion-icon></a>
+                            <h2 style="flex-basis: 100%;text-align: center;">Match</h2>
+                        </div>
+                    </div>
+                    <div class="mc-col">
+                        <div class="row align-items-center justify-content-center text-center">
+                            <div class="col-5 col-lg-3">
+                                <div class="">
+                                    <img src="<?= $match->home->flag ?>" style="width: 100px;height: auto;">
+                                </div>
+                                <div style="height: 50px;"><?= $match->home->name ?></div>
+                            </div>
+                            <div class="col-2 col-lg-2">
+                                vs
+                            </div>
+                            <div class="col-5 col-lg-3">
+                                <div class="">
+                                    <img src="<?= $match->away->flag ?>" style="width: 100px;height: auto;">
+                                </div>
+                                <div style="height: 50px;"><?= $match->away->name ?></div>
+                            </div>
+                        </div>
+
+<!--                        Match -->
+                        <?php if($match->match_date > date('c')) :?>
+                            <div class="text-center">
+                                <?php if(get_minute_diff($match->match_date) > 60 ) :?>
+                                    <p class="text-secondary">Match dimulai pada <strong class="text-danger"><?= date('d M Y H:i', strtotime($match->match_date) ) ?> </strong> WIB </p>
+                                <?php else :?>
+                                    <p class="text-secondary">Match dimulai <strong class="text-danger"><?=  get_minute_diff($match->match_date) ?> </strong> menit lagi </p>
+                                <?php endif;?>
+                            </div>
+                            <div class="row">
+                                <?php if(isset($status_payment) && $status_payment->success) :?>
+                                    <div class="col-12 col-lg-6 offset-lg-3">
+                                        <a href="<?= $this->router->to('siteMatchVirtualStadium', [ 'id' => $match->id]) ?>" class="btn btn-success w-100 rounded-pill">
+                                            <div class="d-flex justify-content-between align-items-center py-2 px-3">
+                                                <h3 class="m-0">Watch Match</h3>
+                                                <div class="d-flex align-items-center">
+                                                    <ion-icon name="chevron-forward-outline" class=""></ion-icon>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <?php if($status_payment->data->is_answered === true):?>
+                                        <div class="col-12 col-lg-6 offset-lg-3 mt-3">
+                                            <a href="#" class="btn btn-secondary w-100 rounded-pill">
+                                                <div class="d-flex justify-content-between align-items-center py-2 px-3 text-center">
+                                                    <h3 class="m-0">Quiz Submited.</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    <?php else :?>
+                                    <div class="col-12 col-lg-6 offset-lg-3 mt-3">
+                                        <a href="<?= $this->router->to('siteMatchQuiz', [ 'id' => $match->id]) ?>" class="btn btn-primary text-white w-100 rounded-pill">
+                                            <div class="d-flex justify-content-between align-items-center py-2 px-3">
+                                                <h3 class="m-0">Begin Quiz</h3>
+                                                <div class="d-flex align-items-center">
+                                                    <ion-icon name="chevron-forward-outline" class=""></ion-icon>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <?php endif;?>
+                                <?php else :?>
+                                    <div class="col-12 col-lg-6 offset-lg-3">
+                                        <a href="<?= $this->router->to('siteMatchBuy', [ 'id' => $match->id]) ?>" class="btn btn-success w-100 rounded-pill">
+                                            <div class="d-flex justify-content-between align-items-center py-2 px-3">
+                                                <h3 class="m-0">Watch</h3>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="rounded-pill text-center mb-0 me-2">
+                                                        <img src="<?=  $this->asset('img/icon/coin.svg')?>" width="18px" class="align-middle">
+                                                        <span><?= number_format($match->price)?></span>
+                                                    </div>
+                                                    <ion-icon name="chevron-forward-outline" class=""></ion-icon>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="text-center mb-3 mt-2" style="max-width: 350px;">
+                                            <small class="text-muted">*Dengan menonton match ini berarti Saya telah menyetujui <a href="<?php $this->router->to('siteStaticPageSingle', ['slug' => 'temrs-conditions'])?>">Syarat & Ketentuan Match</a></small>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php else :?>
+                            <div class="row">
+                                <div class="col-12 col-lg-6 offset-lg-3">
+                                    <a href="#" class="btn btn-secondary w-100 rounded-pill">
+                                        <div class="d-flex justify-content-between align-items-center py-2 px-3 text-center">
+                                            <h3 class="m-0">Match has ended.</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endif;?>
+
+
+                        <?php if(false) :?>
+<!--                        Quiz -->
+<!--
+                        <?php if($match->closing_date > date('c')) :?>
+                        <div class="text-center">
+                            <?php if(get_minute_diff($match->closing_date) > 60 ) :?>
+                            <p class="text-secondary">Quiz berakhir pada <strong class="text-danger"><?= date('d M Y H:i', strtotime($match->closing_date) ) ?> </strong> WIB </p>
+                            <?php else :?>
+                                <p class="text-secondary">Quiz berakhir <strong class="text-danger"><?=  get_minute_diff($match->closing_date) ?> </strong> menit lagi </p>
+                            <?php endif;?>
+                        </div>
+                        <div class="row">
+                            <?php if(isset($status_payment) && isset($status_payment->data->is_answered)) :?>
+                                <div class="col-12 col-lg-6 offset-lg-3">
+                                    <a href="#" class="btn btn-secondary w-100 rounded-pill">
+                                        <div class="d-flex justify-content-between align-items-center py-2 px-3 text-center">
+                                            <h3 class="m-0">You Already Answer Match Quiz.</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php elseif(isset($status_payment) && $status_payment->success) :?>
+                                <div class="col-12 col-lg-6 offset-lg-3">
+                                    <a href="<?= $this->router->to('siteMatchQuiz', [ 'id' => $match->id]) ?>" class="btn btn-success w-100 rounded-pill">
+                                        <div class="d-flex justify-content-between align-items-center py-2 px-3">
+                                            <h3 class="m-0">Mulai Quiz</h3>
+                                            <div class="d-flex align-items-center">
+                                                <ion-icon name="chevron-forward-outline" class=""></ion-icon>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php else :?>
+                            <div class="col-12 col-lg-6 offset-lg-3">
+                                <a href="<?= $this->router->to('siteMatchQuiz', [ 'id' => $match->id]) ?>" class="btn btn-success w-100 rounded-pill">
+                                    <div class="d-flex justify-content-between align-items-center py-2 px-3">
+                                        <h3 class="m-0">Mulai</h3>
+                                        <div class="d-flex align-items-center">
+                                            <div class="rounded-pill text-center mb-0 me-2">
+                                                <img src="<?=  $this->asset('img/icon/coin.svg')?>" width="18px" class="align-middle">
+                                                <span><?= number_format($match->quiz_price)?></span>
+                                            </div>
+                                            <ion-icon name="chevron-forward-outline" class=""></ion-icon>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="text-center mb-3 mt-2" style="max-width: 350px;">
+                                    <small class="text-muted">*Dengan melanjutkan quiz ini berarti Saya telah menyetujui <a href="<?php $this->router->to('siteStaticPageSingle', ['slug' => 'temrs-conditions'])?>">Syarat & Ketentuan Quiz</a></small>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                        <?php else :?>
+                        <div class="row">
+                            <div class="col-12 col-lg-6 offset-lg-3">
+                                <a href="#" class="btn btn-secondary w-100 rounded-pill">
+                                    <div class="d-flex justify-content-between align-items-center py-2 px-3 text-center">
+                                        <h3 class="m-0">Match Quiz has ended.</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <?php endif;?>
+
+                -->
+                        <?php endif;?>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

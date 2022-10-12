@@ -1,0 +1,25 @@
+<main>
+    <section class="main-container bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 offset-lg-3">
+                    <div class="mc-card border bg-white text-center p-4">
+                        <div class="text-secondary">Success Redeem</div>
+                        <div class="mb-3"><img src="<?= $this->asset('img/check.png') ?>"></div>
+                        <h5 class="text-primary">Terima kasih atas pembelian Anda</h5>
+                        <?php if($product->type == 0) :?>
+                            <div class="text-muted mb-3">Silahkan claim hadiah anda dengan klik tombol di bawah!</div>
+                            <div><a href="<?= $this->router->to('siteStoreRedeemForm', ['id' => $product->id]) ?>" class="btn btn-outline-success btn-lg rounded-pill px-5">Claim Now</a></div>
+                        <?php elseif($product->type == 1) : ?>
+                            <div class="text-muted mb-3">Sistem kami akan segera memeriksa pembayaran Anda dan silahkan mengisi form di bawah ini untuk claim hadiah!</div>
+                            <div><a href="<?= $this->router->to('siteStoreRedeemForm', ['id' => $product->id]) ?>" class="btn btn-outline-success btn-lg rounded-pill px-5">Go To Form</a></div>
+                        <?php elseif($product->type == 2) : ?>
+                            <div class="text-muted mb-3">Sistem kami akan segera memeriksa pembayaran Anda dan silahkan check jumlah coin Anda secara berkala!</div>
+                            <div><a href="<?= $this->router->to('sitePaymentHistory') ?>" class="btn btn-outline-success btn-lg rounded-pill px-5">Go To Coin History</a></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

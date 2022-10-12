@@ -1,0 +1,46 @@
+<form  method="POST" class="needs-validation main" novalidate>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-shadow">
+        <div class="navbar-multiline mr-auto">
+            <span class="navbar-brand" href="#0">Update Match Result</span>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?= $this->router->to('adminHome') ?>">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?= $this->router->to('adminMatch') ?>">Match</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?= $subtitle ?></li>
+                </ol>
+            </nav>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </nav>
+
+    <div class="container p-3">
+        <div class="row mb-3">
+            <?= $form->csrfField('noob') ?>
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-header">Update Match Result</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3><?= $match->league->title ?></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="mb-3"><?= $match->home_team->name ?></h4>
+                                <?= $form->field('home_score'); ?>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="mb-3"><?= $match->away_team->name ?></h4>
+                                <?= $form->field('away_score'); ?>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

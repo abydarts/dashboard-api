@@ -1,0 +1,91 @@
+<main class="single-community">
+    <?php if(isset($tournament->banner) && $tournament->banner != null):?>
+        <section class="">
+            <div><a href="" target="_blank"><img class="w-100 h-100" src="<?=$tournament->banner?>"></a></div>
+        </section>
+    <?php endif;?>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <?= $this->partial('tournament/single-detail') ?>
+                <div class="col-12 col-lg-6">
+
+                    <?= $this->partial('tournament/single-sticky-menu') ?>
+
+                    <div class="mc-col">
+                        <div class="mc-title border-0 m-0">
+                            <h2>Peraturan</h2>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="mc-card text-secondary text-center p-4">
+                                    <p>Update soon...</p>
+                                </div>
+                                <div class="mc-card text-secondary p-4 d-none">
+                                    <p>Rules dan Mekanisme Turnamen AOV Yamisok</p>
+                                    <ul>
+                                        <li>Total Prize Pool adalah Rp 1.000.000</li>
+                                        <li>1st Winner  : Rp 500.000</li>
+                                        <li>2nd Winner : Rp 300.000</li>
+                                        <li>3rd Winner  : Rp 200.000</li>
+                                    </ul>
+                                    <p></p>
+                                    <p>Mekanisme:</p>
+                                    <ol>
+                                        <li>Team yang ada di Bracket atas ( Bagian Kiri ) harus membuat Lobby dan Share No lobby di match channel masing masing</li>
+                                        <li>1 Team beranggotakan 5 orang</li>
+                                        <li>Setiap Peserta hanya dapat ikut dalam 1 team</li>
+                                        <li>Nama Pemain, in game name dan Open ID harus sama dengan yang di daftarkan di Yamisok</li>
+                                        <li>Pemain tidak boleh mengganti pemain dan juga in game name begitu turnamen Dimulai turnamen selesai</li>
+                                        <li>Kompetisi akan di adakan di server Indonesia</li>
+                                        <li>Salah satu dari kapten team akan membuat room Custom 5v5 Tournament game</li>
+                                        <li>Tidak boleh ada wasit/Spectator dari pihak manapun kecuali Admin</li>
+                                        <li>Kedua Kapten team akan mengundang seluruh anggota team nya untuk masuk ke dalam Room yang sudah di buat</li>
+                                        <li>Jika pemain tidak memasuki room match dalam 10 menit, maka team akan terkena WO</li>
+                                        <li>Pemimpin team yang memenangkan pertandingan diwajibkan melaporkan hasil pertandingan Berupa Screenshot ke tombol report yamisok</li>
+                                        <li>Kompetisi akan di adakan dengan system Singleelemination draft Ban/Pick dengan format Best of one</li>
+                                        <li>Babak Final akan di adakan dengan format Best Of three (Bo3)</li>
+                                        <li>Batas pengiriman report hasil pertandingan maximal 45 menit setelah pertandingan di mulai, atau kedua team akan di WO</li>
+                                    </ol>
+
+                                    <p></p>
+                                    <p>Peraturan:</p>
+
+                                    <p>Berikut adalah Jadwal dan waktu untuk tournament ini:</p>
+                                    <ul>
+                                        <li>Round 1     : Kamis, 21 February 2019 (19.00 - 19.45)</li>
+
+                                        <li>Round 2     : Kamis, 21 February 2019 (19.45 - 20.30)</li>
+
+                                        <li>Round 3     : Kamis, 21 February 2019 (20.30 - 21.15)</li>
+
+                                        <li>Round 4     : Kamis, 21 February 2019 (21.15 - 22.00)</li>
+
+                                        <li>Round 5     : Jum'at, 22 February 2019 (19.00 – 19.45)</li>
+
+                                        <li>Semi Final  : Jum'at, 22 February 2019 (19.45 – 20.30)</li>
+
+                                        <li>Final & 3rd  : Jum'at, 22 February 2019 ( 20.30 – 21.15)
+                                    </ul>
+                                    <p></p>
+                                    <p>#Jika waktu tournament dihari pertama masih panjang & jumlah team yang tersisa memungkinkan untuk diselesaikan, admin akan menginfokan di chat lobby tournament.</p>
+                                    <ol>
+                                        <li>Peserta harus meggunakan akun personal</li>
+                                        <li>Peserta dapat menggunakan semua hero KECUALI hero yang paling baru di rilis di minggu acara turnamen diadakan</li>
+                                        <li>Peserta dapat menggunakan semua arcana dan skin yang telah di miliki oleh pemain tersebut</li>
+                                        <li>Peserta harus memastikan batrai dan jaringan adalah tanggung jawab dari masingmasing peserta</li>
+                                        <li>Untuk diskoneksi yang terjadi, tidak akan di lakukuan rematch</li>
+                                        <li>Pemain tidak di perbolehkan menggunakan katakata kasar di dalam match dan berakibat WO kepada pemain yang melanggar</li>
+                                        <li>Penggunaan cheat program akan langsung di diskualifikasi</li>
+                                        <li>Segala bentuk pelanggaran yang di lakukan personal (salah satu dari anggota team) berakibat diskualifikasi terhadap team nya</li>
+                                        <li>Keputusan admin adalah mutlak dan tidak dapat di ganggu gugat</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

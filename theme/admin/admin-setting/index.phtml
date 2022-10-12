@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white navbar-shadow">
+    <div class="navbar-multiline mr-auto">
+        <span class="navbar-brand" href="#0">Configurations</span>
+        <small>List of system settings that can be configured</small>
+    </div>
+</nav>
+
+<div class="container p-3">
+    <?php if(!$menus): ?>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="jumbotron">
+                    <div class="jumbotron-icon bg-primary">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h5>Whoops!</h5>
+                    <p>There's no setting that can be configured from this area. And you can do nothing about it.</p>
+                </div>
+            </div>
+        </div>
+    <?php else: ?>
+        <?php foreach($menus as $gprs): ?>
+            <div class="row">
+                <?php foreach($gprs as $name => $menu): ?>
+                <div class="col-md-6 pb-3">
+                    <div class="card card-left-icon">
+                        <div class="card-icon bg-primary text-white" style="width:8rem;">
+                            <?= $menu->icon ?>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><?= hs($menu->label) ?></h5>
+                            <p class="card-text"><?= hs($menu->info) ?></p>
+                            <ul class="list-inline mb-0">
+                                <?php foreach($menu->options as $opt): ?>
+                                    <li class="list-inline-item">
+                                        <a href="<?= to_route($opt->route) ?>">
+                                            <?= hs($opt->label) ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>

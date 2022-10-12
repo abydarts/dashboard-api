@@ -1,0 +1,55 @@
+<main>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="mc-col py-4 m-0">
+                        <div class="mc-title align-items-center border-0 m-0">
+                            <a href="<?= $this->router->to('siteProfileSingle') ?>" class="btn text-primary position-absolute"><ion-icon name="arrow-back-outline" size="large"></ion-icon></a>
+                            <h2 style="flex-basis: 100%;text-align: center;">Point History</h2>
+                        </div>
+                    </div>
+                    <div class="mc-col">
+                        <div class="row">
+                            <?php foreach($list as $trans):?>
+                                <?php
+                                $class = '';
+                                ?>
+                            <div class="col-12">
+                                <a href="#"  class="trxBtn">
+                                    <div class="tr">
+                                        <div class="tt-date"> <?= date('d M Y', strtotime($trans->created_at)) ?></div>
+                                        <div class="tt-trx">
+                                            <div class="trx-desc">
+                                                <div class="td-name"><?= $trans->meta->description ?? ucwords($trans->type) ?></div>
+                                            </div>
+                                            <div class="tt-price <?=$trans->type == "deposit" ? 'text-success':'text-danger'?>"><?=$trans->type == "deposit" ? '+':''?><?= number_format($trans->amount)?></div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+<!--                        <nav>-->
+<!--                            <ul class="pagination justify-content-center">-->
+<!--                                <li class="page-item">-->
+<!--                                    <a class="page-link" href="#" aria-label="Previous">-->
+<!--                                        <span aria-hidden="true">«</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="page-item"><a class="page-link active" href="#">1</a></li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                                <li class="page-item">-->
+<!--                                    <a class="page-link" href="#" aria-label="Next">-->
+<!--                                        <span aria-hidden="true">»</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </nav>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

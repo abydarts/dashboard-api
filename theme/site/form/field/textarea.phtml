@@ -1,0 +1,33 @@
+<?php
+    $value = (string)$value;
+    $attrs = [
+        'class'       => 'form-control',
+        'placeholder' => $field->label,
+        'id'          => $id,
+        'name'        => $field->name
+    ];
+
+    if(isset($field->monospace) && $field->monospace)
+        $attrs['class'].= ' textarea-monospace';
+
+    // required
+    if(isset($rules->required) && $rules->required)
+        $attrs['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $attrs['required'] = null;
+
+    // length
+    if(isset($rules->length)){
+        if(isset($rules->length->min))
+            $attrs['minlength'] = $rules->length->min;
+        if(isset($rules->length->max))
+            $attrs['maxlength'] = $rules->length->max;
+    }
+?>
+<div class="form-group<?= ($error ? ' is-invalid' : '' ) ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <textarea<?= to_attr($attrs) ?>><?= hs($value ?? '') ?></textarea>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

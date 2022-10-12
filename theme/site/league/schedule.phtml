@@ -1,0 +1,83 @@
+<main>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="mc-col">
+                        <?= $this->partial('league/sticky-menu') ?>
+                        <div class="mc-title">
+                            <h2>Schedule</h2>
+                        </div>
+                        <div class="mc-col">
+                            <div class="schedule-table mc-table full-table mb-4">
+                                <input type="hidden" id="league-id" value="<?=$league->id?>">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">MATCH Day</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="3">
+                                            <div class="matchday-slider">
+                                                <?php $slide_id = null;?>
+                                                <?php foreach ($week_range as $i=>$date):?>
+                                                    <?php if($closest_date == $date)  $slide_id = $i;?>
+                                                    <div data-date="<?= date('Y-m-d', strtotime($date)) ?>" data-date-text="<?= date('l, d\t\h F', strtotime($date)) ?>" class="<?= $closest_date == $date ? 'active':''?>">
+                                                        <a href="#">
+                                                            <div class="md-date">
+                                                                <div>MD <?= $i+1?></div>
+                                                                <div><?= date('M, d', strtotime($date)) ?></div>
+                                                                <div><?= date('D', strtotime($date)) ?></div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                <?php endforeach;?>
+                                            </div>
+                                            <input type="hidden" id="closest-date" value="<?= $slide_id ?>">
+                                            <h5 class="md-selected-date"><?= date('l, d\t\h F', strtotime($closest_date)) ?></h5>
+                                        </td>
+                                    </tr>
+
+                                    <?php if(count($matches) > 0) : ?>
+                                        <?php foreach($matches as $match) :?>
+                                            <tr class="match-schedule match-<?=date('Y-m-d', strtotime($match->match_date))?>">
+                                                <td>
+                                                    <span class="full-name d-none d-sm-inline-block"><?= $match->home->name ?></span>
+                                                    <span class="d-inline-block d-sm-none"><?= $match->home->name ?></span>
+                                                    <img src="<?= $match->home->flag ?>" width="20px" class="align-middle ms-2">
+                                                </td>
+                                                <td>
+                                                    <?php if(isset($match->result) && $match->result !== null) :?>
+                                                        <strong><?= $match->result->home_score.'-'.$match->result->away_score; ?></strong>
+                                                    <?php else:?>
+                                                        <strong class="badge bg-black"><?= date('H:i', strtotime($match->match_date) ); ?></strong>
+                                                    <?php endif;?>
+                                                </td>
+                                                <td><img src="<?= $match->away->flag ?>" width="20px" class="align-middle me-2"><span class="d-inline-block d-sm-none"><?= $match->away->name ?></span><span class="full-name d-none d-sm-inline-block"><?= $match->away->name ?></span></td>
+                                            </tr>
+                                        <?php endforeach;?>
+                                    <?php else : ?>
+                                        <tr class="match-schedule match-<?=date('Y-m-d')?>">
+                                            <td colspan="3" class="text-center">
+                                                <small>No Match</small>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <span>Match in WIB time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

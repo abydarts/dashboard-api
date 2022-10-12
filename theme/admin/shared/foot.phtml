@@ -1,0 +1,13 @@
+<?php $csses = \AdminUi\Library\Assets::getAssets('css', 'foot'); ?>
+<?php foreach($csses as $file => $version): ?>
+    <link rel="stylesheet" href="<?= $file ?>?v=<?= $version ?>">
+<?php endforeach; ?>
+
+<?php if(module_exists('lib-upload')): ?>
+	<script src="<?= $this->asset('js/spark-md5.min.js') ?>"></script>
+<?php endif; ?>
+
+<?php $jses = \AdminUi\Library\Assets::getAssets('js', 'foot'); ?>
+<?php foreach($jses as $file => $version): ?>
+    <script src="<?= $file ?>?v=<?= $version ?>"></script>
+<?php endforeach; ?>

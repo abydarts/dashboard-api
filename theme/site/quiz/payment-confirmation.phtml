@@ -1,0 +1,86 @@
+<main>
+    <section class="main-container bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 offset-lg-3">
+                    <div class="mc-col">
+                        <div class="row mb-4">
+                            <div class="wizard-store" id="wizard-store">
+                                <h3 class="text-primary fw-bold">Konfirmasi Penukaran</h3>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: 99%;background-color: #198754;" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-lg-12">
+                                        <div class="mt-2 mb-2 text-muted">Total Tagihan</div>
+                                        <div class="mb-3">
+                                            <img src="<?=  $this->asset('img/icon/coin.svg')?>" width="18px" class="align-middle">
+                                            <span><?= number_format($match->quiz_price)?></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="flush-headingOne">
+                                                    <button class="accordion-button collapsed ws-method" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                        <img src="<?=  $this->asset('img/icon/coin.svg')?>" width="50px" class="align-middle"> Koin
+                                                    </button>
+                                                </h2>
+                                                <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                    <div class="accordion-body text-secondary">
+                                                        <div class="mb-3">Detail Penukaran</div>
+                                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                                            <div>
+                                                                <div>Saldo</div>
+                                                            </div>
+                                                            <div>
+                                                                <?php $balance = $this->profile->getCoinBalance();?>
+                                                                <div><?= number_format($balance)?></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <div>
+                                                                <div>Harga</div>
+                                                            </div>
+                                                            <div>
+                                                                <div>- <?= number_format($match->quiz_price)?></div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <div>
+                                                                <div>Sisa Koin</div>
+                                                            </div>
+                                                            <div>
+                                                                <div><?= number_format($balance - $match->quiz_price)?></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-grid">
+                                        <?php if($balance >= $match->quiz_price || $match->quiz_price == 0):?>
+                                        <form method="post">
+                                            <?= $form->csrfField('noob') ?>
+                                            <input type="hidden" name="match_id" value="<?= $match->id ?>">
+                                            <input type="hidden" name="is_quiz" value="1">
+                                            <button type="submit" class="btn btn-success rounded-pill py-3 w-100">Tukar Sekarang</button>
+                                        </form>
+                                        <?php else :?>
+                                            <div class="text-center mb-3">
+                                                <small class="text-muted">*Koin Anda tidak mencukupi untuk mengikuti kuis ini. Silahkan topup terlebih dahulu</small>
+                                            </div>
+                                            <a href="<?= $this->router->to('sitePaymentTopup')?>" class="btn btn-warning rounded-pill py-3 w-100">Topup Sekarang</a>
+                                        <?php endif;?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

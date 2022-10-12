@@ -1,0 +1,49 @@
+<?php
+    $opts = [];
+    if(isset($field->options))
+        $opts = (array)$field->options;
+    if(isset($options))
+        $opts = $options;
+
+    $opts = group_by_prop($opts, 'parent');
+    $fid  = $id . '-';
+    if(isset($opts[0])){
+        foreach($opts[0] as $opt){
+            $fid.= $opt->value;
+            break;
+        }
+    }
+
+    $is_required = false;
+    if(is_object($field->rules)){
+        if(isset($field->rules->required) && $field->rules->required)
+            $is_required = true;
+        if(isset($field->rules->empty) && !$field->rules->empty)
+            $is_required = true;
+    }
+
+    $big_class = '';
+
+    // big size
+    if(isset($field->size))
+        $big_class = ' size-' . $field->size;
+?>
+<div class="form-group<?= ($error?' is-invalid':'') ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $fid ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <div class="radio-group<?= $big_class ?>">
+        <?php if(isset($opts[0])): ?>
+            <?php
+                $item_param = [
+                    'opts'  => $opts,
+                    'index' => 0,
+                    'value' => $value,
+                    'required' => $is_required
+                ];
+            ?>
+            <?= $this->partial('form/field/radio-tree__item', $item_param) ?>
+        <?php endif; ?>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

@@ -1,0 +1,102 @@
+<main>
+    <section class="main-container bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 offset-lg-3">
+                    <?php if(isset($success_msg)):?>
+                        <div class="alert alert-success" role="alert">
+                            Your team successfully updated.
+                        </div>
+                    <?php endif;?>
+                    <div class="ratio ratio-16x9">
+                        <img src="<?= (empty($tournament->flag) ? $this->asset('/img/post/image-thumbnail.jpg') : $tournament->flag) ?>" class="card-img-top rounded-top" alt="...">
+                    </div>
+                    <div class="mc-card border bg-white p-4 rounded-0 rounded-bottom">
+                        <h3 class="text-primary"><?= ucwords($tournament->name) ?></h3>
+                        <div class="text-secondary">Turnamen dimulai:</div>
+                        <div class="text-secondary fw-bold mb-3"><?= date('d F Y H:i', strtotime($tournament->start_date) )  ?> WIB</div>
+                        <div class="text-secondary">Mode Turnamen</div>
+                        <?php if ($tournament->team_type == 1) :?>
+                        <div class="text-secondary fw-bold mb-3">Single Elimination (1vs1)</div>
+                        <?php elseif($tournament->team_type == 1) :?>
+                        <div class="text-secondary fw-bold mb-3">Single Elimination (2vs2)</div>
+                        <?php elseif($tournament->team_type == 1) :?>
+                        <div class="text-secondary fw-bold mb-3">Single Elimination (3vs3)</div>
+                        <?php endif;?>
+                        <hr>
+                        <form method="post">
+                            <?= $form->csrfField('noob') ?>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <h5 class="text-primary">Edit Team</h5>
+                                    <small class="text-secondary">All team name and user id will be saved in our tournament database. Please fill correctly.</small>
+                                </div>
+
+                                <?php if($tournament->team_type != 1) :?>
+                                    <div class="mb-3">
+                                        <label for="input-name" class="form-label text-secondary">Team Name</label>
+                                        <input type="text" name="group_name" class="form-control form-control-lg" id="input-name" placeholder="ex. GGWP Team" <?= $group ? 'value="'.$group->name.'"':''?>>
+                                    </div>
+                                <?php for($i=1;$i<=$tournament->team_type;$i++):?>
+                                <hr>
+                                <div class="mb-3">
+                                    <h6 class="text-primary">Data Player ke-<?=$i?></h6>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="input-userid" class="form-label text-secondary">User Id e-PES 2021</label>
+                                    <input type="text" name="group_players[<?=$i?>][pes_id]" class="form-control form-control-lg" id="input-userid" placeholder="Player 1" <?= $group ? 'value="'.$group->players[$i]->domisili.'"':''?>>
+                                </div>
+                                        <div class="mb-3">
+                                            <label for="input-userid" class="form-label text-secondary">Email</label>
+                                            <input type="email" name="group_players[<?=$i?>][email]" class="form-control form-control-lg" placeholder="Email" value="<?= $this->profile->email?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="input-userid" class="form-label text-secondary">Domisili</label>
+                                            <input type="text" name="group_players[<?=$i?>][domisili]" class="form-control form-control-lg" placeholder="Domisili" <?= $group ? 'value="'.$group->players[0]->domisili.'"':''?>>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="input-userid" class="form-label text-secondary">Alamat</label>
+                                            <input type="text" name="group_players[<?=$i?>][address]" class="form-control form-control-lg" placeholder="Alamat" <?= $group ? 'value="'.$group->players[0]->address.'"':''?>>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="input-userid" class="form-label text-secondary">Nomor Identitas (KTP)</label>
+                                            <input type="number" name="group_players[<?=$i?>][identity]" class="form-control form-control-lg" placeholder="Nomor Identitas (KTP)" <?= $group ? 'value="'.$group->players[0]->identity.'"':''?>>
+                                        </div>
+                                <?php endfor; ?>
+                                <?php else:?>
+
+                                    <div class="mb-3">
+                                        <label for="input-name" class="form-label text-secondary">Player Name</label>
+                                        <input type="text" name="group_name" class="form-control form-control-lg" id="input-name" placeholder="ex. GGWP Team" <?= $group ? 'value="'.$group->name.'"':''?>>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="input-userid" class="form-label text-secondary">User Id e-PES 2021</label>
+                                        <input type="text" name="group_players[0][pes_id]" class="form-control form-control-lg" id="input-userid" placeholder="Player 1" <?= !empty($group->players[0]) ? 'value="'.$group->players[0]->pes_id.'"':''?>>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="input-userid" class="form-label text-secondary">Email</label>
+                                        <input type="email" name="group_players[0][email]" class="form-control form-control-lg" placeholder="Email" value="<?= $this->profile->email?>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="input-userid" class="form-label text-secondary">Domisili</label>
+                                        <input type="text" name="group_players[0][domisili]" class="form-control form-control-lg" placeholder="Domisili" <?= !empty($group->players[0]) ? 'value="'.$group->players[0]->domisili.'"':''?>>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="input-userid" class="form-label text-secondary">Alamat</label>
+                                        <input type="text" name="group_players[0][address]" class="form-control form-control-lg" placeholder="Alamat" <?= !empty($group->players[0]) ? 'value="'.$group->players[0]->address.'"':''?>>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="input-userid" class="form-label text-secondary">Nomor Identitas (KTP)</label>
+                                        <input type="text" name="group_players[0][identity]" class="form-control form-control-lg" placeholder="Nomor Identitas (KTP)" <?= !empty($group->players[0]) ? 'value="'.$group->players[0]->identity.'"':''?>>
+                                    </div>
+                                <?php endif;?>
+                            </div>
+                            <div><button type="submit" class="btn btn-success btn-lg px-5 w-100">Update</button></div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

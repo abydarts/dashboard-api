@@ -1,0 +1,31 @@
+<main>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="mc-col">
+                        <div class="mc-title border-0 m-0">
+                            <h2>Notifications</h2>
+                        </div>
+                        <ul class="notif-list">
+                            <?php if(!empty($notifications)) :?>
+                            <?php foreach($notifications as $notif) :?>
+                            <li>
+                                <a href="<?= $notif->data->url ?? '#'?>">
+                                    <span class="icon"><ion-icon name="notifications"></ion-icon></span>
+                                    <span class="ms-2"><?= $notif->data->title ?></span>
+                                </a>
+                            </li>
+                            <?php endforeach; ?>
+                            <?php else :?>
+                                <li class="text-center">
+                                    <small class="ms-2">There is no notification yet</small>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

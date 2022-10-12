@@ -1,0 +1,59 @@
+<main>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="mc-col">
+                        <?php if($featured_post) :?>
+                            <div class="mc-title">
+                                <h2>Highlight</h2>
+                            </div>
+                            <div class="featured-post">
+                                <a href="<?= $featured_post->page ?>" class="btn-card">
+                                    <div class="fp-li card border-0 mb-4">
+                                        <img loading="lazy" src="<?=( empty($featured_post->cover->url) ? $this->asset('/img/post/image-thumbnail.jpg') : $featured_post->cover->url ) ?>" class="card-img-top" alt="<?= $featured_post->cover->label ?>" />
+                                        <div class="mc-label">
+                                            <?php foreach ($featured_post->category as $cat) : ?>
+                                                <span class="badge bg-black px-3 rounded-pill"><?= $cat->name ?></span>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="card-body fp-title">
+                                            <h5 class="card-title"><?= $featured_post->title->safe ?></h5>
+                                            <p class="card-text"><small class="text-muted"><?= $featured_post->published->format('Y-m-d H:i:s') ?></small></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="mc-title">
+                            <h2>News Update Articles & video</h2>
+                            <a href="<?= $this->router->to('sitePostIndex') ?>" class="btn-arrow">Lihat semua</a>
+                        </div>
+                        <div class="row mb-4">
+                            <?php if($posts && count($posts) > 0): ?>
+                                <?php foreach($posts as $post): ?>
+                                    <div class="col-12">
+                                        <a href="<?= $post->page ?>" class="media-list">
+                                            <div class="box-thumb">
+                                                <img loading="lazy" src="<?=( empty($post->cover->url) ? $this->asset('/img/post/image-thumbnail.jpg') : $post->cover->url ) ?>" class="" alt="<?= $post->cover->label ?>" />
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="title"><?= $post->title ?></h5>
+                                                <p class="desc"><?= empty($post->meta->description) ? hs(strip_tags($post->content->chars(160))) : $post->meta->description ?></p>
+                                                <small><?= $post->published->format('Y-m-d H:i:s') ?></small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <small class="text-center">No post yet</small>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <?= $sidebar_content ?>
+            </div>
+        </div>
+    </section>
+</main>

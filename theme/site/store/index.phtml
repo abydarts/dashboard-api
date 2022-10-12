@@ -1,0 +1,71 @@
+<main>
+    <?php if(isset($slides)) :?>
+    <section class="banner-slider">
+        <?php foreach ($slides->images as $img):?>
+        <div><img src="<?= $img->url ?>"></div>
+        <?php endforeach;?>
+    </section>
+    <?php endif; ?>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="mc-col">
+                        <div class="mc-title">
+                            <h2 style="flex-basis: 0;">Store</h2>
+                            <div class="dropdown">
+                                <span class="text-secondary">Sort by:</span>
+                                <a href="#" class="btn-auth dropdown-toggle text-secondary btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Recommended
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="?order_by=recommended">Recommended</a></li>
+                                    <li><a class="dropdown-item" href="?order_by=price&order=asc">Price Low To High</a></li>
+                                    <li><a class="dropdown-item" href="?order_by=price&order=desc">Price High To Low</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <?php foreach($products as $product) :?>
+                            <div class="col-6 col-lg-3 mb-4">
+                                <a href="<?= $this->router->to('siteStoreSingle', ['id' => $product->id])?>" class="mc-card-item">
+                                    <div class="mc-card bg-white border">
+                                        <div class="img-hover ratio ratio-1x1">
+                                            <img src="<?= $product->image ?>" class="card-img-top" alt="">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= $product->name ?></h5>
+                                            <p class="card-text"><?= substr($product->description, 0, 160) ?></p>
+                                            <h5 class="m-0"><?= number_format($product->price)?> Points</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item <?= $pagination->current_page > 1 ? '':'disabled'?>">
+                                    <a class="page-link" href="?page=<?= $pagination->current_page - 1 ?>" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <?php foreach($pagination->links as $link) :?>
+                                <li class="page-item <?= $link->active ? 'active':'' ?>"><a class="page-link" href="?page=<?= $link->label ?>"><?= $link->label ?></a></li>
+                                <?php endforeach;?>
+                                <li class="page-item <?= $pagination->current_page < $pagination->last_page ? '': 'disabled'?>">
+                                    <a class="page-link" href="?page=<?= $pagination->current_page + 1 ?>" aria-label="Next">
+                                        <span class="sr-only">Next</span>
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

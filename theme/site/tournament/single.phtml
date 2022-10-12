@@ -1,0 +1,239 @@
+<main class="single-community">
+    <?php if(isset($tournament->banner) && $tournament->banner != null):?>
+        <section class="">
+            <div><a href="" target="_blank"><img class="w-100 h-100" src="<?=$tournament->banner?>"></a></div>
+        </section>
+    <?php endif;?>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <?= $this->partial('tournament/single-detail') ?>
+                <div class="col-12 col-lg-6">
+
+                    <?= $this->partial('tournament/single-sticky-menu') ?>
+
+                    <div class="mc-col">
+                        <div class="mc-title border-0 m-0">
+                            <h2>Bracket</h2>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <nav>
+                                    <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
+                                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Quarter</button>
+                                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Semi Final</button>
+                                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Final</button>
+                                    </div>
+                                </nav>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                        <div class="mc-tree mb-5">
+                                            <div class="text-center"><small>Coming soon...</small></div>
+                                            <table class="table table-responsive table-bordered align-middle d-none">
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="match-number">M1</div>
+                                                        <div class="nth bg-primary">
+                                                            <div class="match">
+                                                                <div class="teams">
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Barbados">
+                                                                          Barbados
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          3
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Luxembourg">
+                                                                          Luxembourg
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          1
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td rowspan="2" class="align-middle">
+                                                        <div class="match-number">M5</div>
+                                                        <div class="nth bg-primary">
+                                                            <div class="match">
+                                                                <div class="teams">
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Barbados">
+                                                                          Barbados
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          3
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Luxembourg">
+                                                                          Luxembourg
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          1
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td rowspan="4" class="align-middle">
+                                                        <div class="match-number">M7</div>
+                                                        <div class="nth bg-primary">
+                                                            <div class="match">
+                                                                <div class="teams">
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Barbados">
+                                                                          Barbados
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          3
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Luxembourg">
+                                                                          Luxembourg
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          1
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="match-number">M2</div>
+                                                        <div class="nth bg-primary">
+                                                            <div class="match">
+                                                                <div class="teams">
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Barbados">
+                                                                          Barbados
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          3
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Luxembourg">
+                                                                          Luxembourg
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          1
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="match-number">M3</div>
+                                                        <div class="nth bg-primary">
+                                                            <div class="match">
+                                                                <div class="teams">
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Barbados">
+                                                                          Barbados
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          3
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Luxembourg">
+                                                                          Luxembourg
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          1
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td rowspan="2" class="align-middle">
+                                                        <div class="match-number">M6</div>
+                                                        <div class="nth bg-primary">
+                                                            <div class="match">
+                                                                <div class="teams">
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Barbados">
+                                                                          Barbados
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          3
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Luxembourg">
+                                                                          Luxembourg
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          1
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="match-number">M4</div>
+                                                        <div class="nth bg-primary">
+                                                            <div class="match">
+                                                                <div class="teams">
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Barbados">
+                                                                          Barbados
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          3
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="team">
+                                                                        <span class="team-name" title="Luxembourg">
+                                                                          Luxembourg
+                                                                        </span>
+                                                                        <span class="team-score">
+                                                                          1
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!-- end table -->
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                        <div class="mc-tree mb-5">
+                                            <div class="text-center"><small>Coming soon...</small></div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                        <div class="mc-tree mb-5">
+                                            <div class="text-center"><small>Coming soon...</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

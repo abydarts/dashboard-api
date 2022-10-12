@@ -1,0 +1,51 @@
+<?php
+    $opts = [];
+    if(isset($field->options))
+        $opts = (array)$field->options;
+    
+    if(isset($rules->enum))
+        $opts = (array)\Mim::$app->config->libEnum->enums->{$rules->enum};
+
+    if(isset($options))
+        $opts = $options;
+
+    $value = (array)$value;
+
+    $fid  = $id . '-';
+    foreach($opts as $opt => $label){
+        $fid.= $opt;
+        break;
+    }
+
+    $big_class = '';
+
+    // big size
+    if(isset($field->size))
+        $big_class = ' size-' . $field->size;
+?>
+<div class="form-group<?= ($error ? ' is-invalid' : '' ) ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $fid ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <div class="checkbox-group<?= $big_class ?>">
+        <?php foreach($opts as $opt => $label): ?>
+            <?php
+                $oid = $id . '-' . $opt;
+                $attrs = [
+                     'type'     => 'checkbox',
+                     'class'    => 'custom-control-input',
+                     'name'     => $field->name . '[]',
+                     'id'       => $oid,
+                     'value'    => $opt
+                ];
+                if(in_array($opt, $value))
+                    $attrs['checked'] = null;
+            ?>
+            <div class="custom-control custom-checkbox">
+                <input<?= to_attr($attrs) ?>>
+                <label class="custom-control-label" for="<?= $oid ?>"><?= $label ?></label>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

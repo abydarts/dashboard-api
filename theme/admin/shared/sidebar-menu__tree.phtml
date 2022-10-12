@@ -1,0 +1,23 @@
+<ul>
+    <?php 
+        $active = $_meta['menus'][$index] ?? '';
+    ?>
+    <?php foreach($menus as $menu): ?>
+        <?php if(!$menu->visible) continue; ?>
+        
+        <?php if(isset($menu->children)): ?>
+            <li class="vertical-menu-parent<?= ($active === $menu->id ? ' active show' : '') ?>">
+                <a href="#0" data-toggle="vertical-menu">
+                    <?= ( isset($menu->icon) ? $menu->icon : '' ) ?> <?= hs($menu->label) ?>
+                </a>
+                <?= $this->partial('shared/sidebar-menu__tree', ['menus'=>$menu->children, 'index'=>($index+1)]) ?>
+            </li>
+        <?php else: ?>
+            <li class="<?= ($active === $menu->id ? 'active' : '') ?>">
+                <a href="<?= hs($menu->link) ?>">
+                    <?= ( isset($menu->icon) ? $menu->icon : '' ) ?> <?= hs($menu->label) ?>
+                </a>
+            </li>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</ul>

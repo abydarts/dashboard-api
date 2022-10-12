@@ -1,0 +1,30 @@
+<?php
+    $iid = $id . '-input';
+    $i_attrs = [
+        'type'        => 'text',
+        'placeholder' => $field->label,
+        'class'       => 'form-control tag-input-filter',
+        'id'          => $iid
+    ];
+    $t_attr = [
+        'class' => 'form-control tag-input-value',
+        'name'  => $field->name,
+        'id'    => $id
+    ];
+    if(isset($rules->required) && $rules->required)
+        $t_attr['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $t_attr['required'] = null;
+
+    if($value && !is_string($value))
+        $value = json_encode($value);
+?>
+<div class="form-group tag-input-container<?= ($error?' is-invalid':'') ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $iid ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <input<?= to_attr($i_attrs) ?>>
+    <ul class="tag-input-items"></ul>
+    <textarea<?= to_attr($t_attr) ?>><?= (string)$value ?></textarea>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

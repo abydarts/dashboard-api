@@ -1,0 +1,30 @@
+<?php
+    $value = (string)$value;
+    $attrs = [
+        'type'        => 'month',
+        'class'       => 'form-control',
+        'placeholder' => $field->label,
+        'id'          => $id,
+        'name'        => $field->name,
+        'value'       => $value
+    ];
+
+    if(isset($rules->required) && $rules->required)
+        $attrs['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $attrs['required'] = null;
+?>
+<div class="form-group<?= ($error?' is-invalid':'') ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <div class="input-group date datetimepicker">
+        <input<?= to_attr($attrs) ?>>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">
+                <i class="fas fa-calendar"></i>
+            </button>
+        </div>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

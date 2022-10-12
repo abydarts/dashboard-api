@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <?= $this->meta->head($meta['head']) ?>
+    <?= $this->partial('shared/head') ?>
+</head>
+<body>
+<?php
+$this->partial('shared/header');
+?>
+
+<main>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <?= $this->partial('profile/profile-section') ?>
+                    <div class="mc-col">
+                        <div class="mc-tabs">
+                            <a href="<?= $this->router->to('siteProfileLiveMatch') ?>"><h2>Live Match</h2></a>
+                            <a href="<?= $this->router->to('siteProfileNewsUpdate') ?>" class="active"><h2>News Update</h2></a>
+                        </div>
+                        <div class="row">
+                            <?php $now = new \DateTime('now') ?>
+                            <?php if (count($posts) > 0) : ?>
+                                <?php foreach($posts as $post): ?>
+                                    <div class="col-12 col-lg-6">
+                                        <a href="<?= $post->page ?>" class="btn-card">
+                                            <div class="card border-0 mb-4">
+
+                                                <div class="ratio ratio-16x9"><img src="<?= empty($post->cover->url) ? $this->asset('/img/post/image-thumbnail.jpg') : $post->cover->url  ?>" class="card-img-top" alt="<?= $post->cover->label ?>"></div>
+                                                <div class="mc-label">
+                                                    <?php if($post->category): ?>
+                                                        <?php foreach($post->category as $cat): ?>
+                                                            <span class="badge bg-black px-3 rounded-pill"><?= $cat->name ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div class="card-body bg-light position-relative">
+                                                    <h5 class="card-title"><?= $post->title ?></h5>
+                                                    <p class="card-text"><small class="text-muted"><?= $post->published->format('Y-m-d H:i:s') ?></small></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <small class="text-center">No post yet</small>
+                            <?php endif; ?>
+<!--                            <nav>-->
+<!--                                <ul class="pagination justify-content-center">-->
+<!--                                    <li class="page-item">-->
+<!--                                        <a class="page-link" href="#" aria-label="Previous">-->
+<!--                                            <span aria-hidden="true">&laquo;</span>-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+<!--                                    <li class="page-item"><a class="page-link active" href="#">1</a></li>-->
+<!--                                    <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                                    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                                    <li class="page-item">-->
+<!--                                        <a class="page-link" href="#" aria-label="Next">-->
+<!--                                            <span aria-hidden="true">&raquo;</span>-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </nav>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?= $this->partial('shared/footer') ?>
+<?= $this->meta->foot($meta['foot']) ?>
+<?= $this->partial('shared/foot') ?>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?php
+    $attrs = [
+        'class' => 'form-control form-summernote',
+        'id'    => $id,
+        'name'  => $field->name
+    ];
+
+    if(isset($rules->required) && $rules->required)
+        $attrs['required'] = null;
+    if(isset($rules->empty) && !$rules->empty)
+        $attrs['required'] = null;
+    if(isset($field->upload))
+        $attrs['data-form'] = $field->upload;
+?>
+<div class="form-group<?= ($error?' is-invalid':'') ?>">
+    <?php if($show_label): ?>
+        <label for="<?= $id ?>"><?= $field->label ?></label>
+    <?php endif; ?>
+    <textarea<?= to_attr($attrs) ?>><?= hs(($value??'')) ?></textarea>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

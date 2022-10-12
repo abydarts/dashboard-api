@@ -1,0 +1,30 @@
+<div class="col-12 col-lg-4">
+    <div class="mc-col">
+        <div class="sidebar-news">
+            <div class="mc-title">
+                <h5>Related News</h5>
+            </div>
+            <div class="row bg-light">
+                <?php if(isset($related_posts)): ?>
+                    <?php foreach($related_posts as $rpost): ?>
+                        <div class="col-12">
+                            <a href="<?= $rpost->page ?>" class="media-list">
+                                <div class="box-thumb">
+                                    <img src="<?=( empty($rpost->cover->url) ? $this->asset('/img/post/image-thumbnail.jpg') : $rpost->cover->url ) ?>" class="" alt="<?= $rpost->cover->label ?>" />
+                                </div>
+                                <div class="media-body">
+                                    <span class="label"></span>
+                                    <h5 class="title"><?= $rpost->title ?></h5>
+                                    <small><?= $rpost->published->format('Y-m-d H:i:s') ?></small>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+            <div class="modal-footer border-0">
+                <a href="<?= $this->router->to('sitePostIndex') ?>" class="btn-arrow">more</a>
+            </div>
+        </div>
+    </div><!-- end col -->
+</div>

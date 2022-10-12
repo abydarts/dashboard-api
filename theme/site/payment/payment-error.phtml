@@ -1,0 +1,19 @@
+<main>
+    <section class="main-container bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 offset-lg-3">
+                    <div class="mc-card border bg-white text-center p-4">
+                        <div class="mb-3"><img width="100%" src="<?= $this->asset('img/cross.png') ?>"></div>
+                        <?php if($error_msg) :?>
+                            <h5 class="text-primary"><?= ucwords($error_msg) ?></h5>
+                        <?php else :?>
+                        <h5 class="text-primary">Terjadi Kesalahan</h5>
+                        <div class="text-muted mb-3">Mohon coba kembali.</div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

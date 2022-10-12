@@ -1,0 +1,63 @@
+<main>
+    <section class="main-container bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="mc-col">
+                        <div class="mc-title flex-column align-items-start">
+                            <h2><?= $this->setting->site_sponsorship_title ?></h2>
+                            <div class="mt-2 text-muted"><?= $this->setting->site_sponsorship_description ?></div>
+                            <?php if($error): ?>
+                                <div class="alert alert-danger"><strong>Whoops</strong> <?= $error ?></div>
+                            <?php elseif($success): ?>
+                                <div class="alert alert-success"><strong>Success</strong> <?= $this->setting->sponsorship_alert_description ?></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="row mb-4 sponsorship-form">
+                            <form method="POST" >
+                                <div class="col-12 col-lg-7">
+                                    <div class="mb-3">
+                                        <?= $form->field('fullname') ?>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-7">
+                                    <div class="mb-3">
+                                        <?= $form->field('subject') ?>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-7">
+                                    <div class="mb-3">
+                                        <div class="form-group">
+                                            <select class="form-control" name="type">
+                                                <option value="" selected disabled style="color: #bcc8d2">Please select contact type</option>
+                                                <option value="support">Support</option>
+                                                <option value="sponsorhip">Sponsorship</option>
+                                                <option value="redeem-issue">Redeem Issue</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-7">
+                                    <div class="mb-3">
+                                        <?= $form->field('email') ?>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-7">
+                                    <div class="mb-3">
+                                        <?= $form->field('content') ?>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-7">
+                                    <button class="btn btn-primary rounded-pill px-5">Submit</button>
+                                </div>
+                                <?php if(module_exists('lib-recaptcha')): ?>
+                                    <input type="hidden" name="secure" id="secure">
+                                <?php endif; ?>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,32 @@
+<main>
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="mc-col">
+                        <div class="mc-title">
+                            <h2 style="flex-basis: 0;">Games</h2>
+                        </div>
+                        <div class="row mb-4">
+                            <?php foreach($games as $game) :?>
+                            <div class="col-6 col-lg-3 mb-4">
+                                <a href="javascript:void(0)" data-id="<?= $game->id ?>" class="gamesCard mc-card-item">
+                                    <div class="mc-card bg-white border" style="height:100%;">
+                                        <div class="img-hover ratio ratio-1x1">
+                                            <img src="<?= $game->icon ?>" class="card-img-top" alt="">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= $game->name ?></h5>
+                                            <p class="card-text"><?= substr($game->note, 0, 160) ?></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

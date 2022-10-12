@@ -1,0 +1,102 @@
+<div class="col-12 col-lg-4">
+    <?php if(isset($resume_league)) : ?>
+    <div class="mc-col">
+        <div class="league-table mc-table sidebar">
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <th colspan="2"><?= $resume_league->name ?></th>
+                    <th>P</th>
+                    <th>GD</th>
+                    <th>PTS</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach($resume_league->classement as $i => $team ):?>
+                    <tr>
+                        <td><?= $i+1 ?></td>
+                        <td><img src="<?= $team->team->flag ?>" width="20px" class="align-middle me-2"><?= !empty($team->team->nickname) ? $team->team->nickname:  $team->team->name ?></td>
+                        <td><?= $team->match_played ?? 0 ?></td>
+                        <td><?= $team->goal_difference ?? 0 ?></td>
+                        <td><?= $team->point ?? 0 ?></td>
+                    </tr>
+                <?php endforeach;?>
+                <tfoot>
+                <tr>
+                    <td colspan="5"><a href="<?= $this->router->to('siteLeagueSingle', ['id'=>$resume_league->id]) ?>" class="btn-arrow">more</a></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <?php endif;?>
+
+    <?php if(isset($resume_league_b)) : ?>
+        <div class="mc-col">
+            <div class="league-table mc-table sidebar">
+                <table class="table table-borderless">
+                    <thead>
+                    <tr>
+                        <th colspan="2"><?= $resume_league_b->name ?></th>
+                        <th>P</th>
+                        <th>GD</th>
+                        <th>PTS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($resume_league_b->classement as $i => $team ):?>
+                        <tr>
+                            <td><?= $i+1 ?></td>
+                            <td><img src="<?= $team->team->flag ?>" width="20px" class="align-middle me-2"><?= !empty($team->team->nickname) ? $team->team->nickname:  $team->team->name ?></td>
+                            <td><?= $team->match_played ?? 0 ?></td>
+                            <td><?= $team->goal_different ?? 0 ?></td>
+                            <td><?= $team->point ?? 0 ?></td>
+                        </tr>
+                    <?php endforeach;?>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5"><a href="<?= $this->router->to('siteLeagueSingle', ['id'=>$resume_league->id]) ?>" class="btn-arrow">more</a></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    <?php endif;?>
+    <div class="mc-col d-none">
+        <div class="schedule-table mc-table">
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <th colspan="3">Today Schedule</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="3">
+                        <h5 class="text-center">MATCH DAY</h5>
+                        <p class="text-center"><?= date('l, d M Y')?></p>
+                    </td>
+                </tr>
+
+                <?php if(isset($today_match) && count($today_match) > 0): ?>
+                <?php foreach($today_match as $match) :?>
+                <tr>
+                    <td><img src="<?= $match->home->flag ?>" width="20px" class="align-middle me-2"><?= $match->home->name ?></td>
+                    <td><strong><?= $match->status == \Match\Model\Matches::STATUS_EXPIRED ? $match->result->home_score.'-'.$match->result->away_score : 'TBA' ?></strong></td>
+                    <td><?= $match->away->name ?><img src="<?= $match->away->flag ?>" width="20px" class="align-middle ms-2"></td>
+                </tr>
+                    <?php endforeach;?>
+                <?php else :?>
+                <tr class="text-center">
+                    <td colspan="5"><small>no match</small> </td>
+                </tr>
+                <?php endif;?>
+                <tfoot>
+                <tr>
+                    <td colspan="5"><a href="<?= $this->router->to('siteLeagueSchedule', ['id'=>$resume_league->id])?>" class="btn-arrow">more</a></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

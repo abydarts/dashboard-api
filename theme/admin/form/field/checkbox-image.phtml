@@ -1,0 +1,50 @@
+<?php
+    $opts = [];
+    if(isset($field->options))
+        $opts = (array)$field->options;
+    
+    if(isset($rules->enum))
+        $opts = (array)\Mim::$app->config->libEnum->enums->{$rules->enum};
+
+    if(isset($options))
+        $opts = $options;
+
+    $value = (array)$value;
+
+    $colcount = $field->column ?? 3;
+    $column   = ceil( 12 / $colcount );
+    $colcount = 12 / $column;
+
+?>
+<div class="form-group <?= ($error ? ' is-invalid' : '' ) ?>">
+    <?php if($show_label): ?>
+        <label><?= $field->label ?></label>
+    <?php endif; ?>
+    <div class="row">
+        <?php $mt_len = 0; ?>
+        <?php foreach($opts as $opt => $image): ?>
+            <?php
+                $mt_len++;
+                $oid = $id . '-' . $opt;
+                $attrs = [
+                     'type'     => 'checkbox',
+                     'class'    => 'custom-control-input',
+                     'name'     => $field->name . '[]',
+                     'id'       => $oid,
+                     'value'    => $opt
+                ];
+                if(in_array($opt, $value))
+                    $attrs['checked'] = null;
+            ?>
+            <div class="col-<?= $column ?>">
+                <div class="custom-control custom-checkbox image-checkbox<?= ($mt_len<=$colcount?'':' mt-4') ?>">
+                    <input<?= to_attr($attrs) ?>>
+                    <label class="custom-control-label" for="<?= $oid ?>">
+                        <img src="<?= $image ?>" alt="<?= $opt ?>" class="img-fluid">
+                    </label>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="invalid-feedback"><?= ($error?$error->text:'') ?></div>
+</div>

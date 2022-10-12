@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="list-group list-group-flush<?= ($filterid?' linkfilter':'') ?>"<?= ($filterid?' data-input="'.$filterid.'"':'') ?>>
+        <?php foreach($items as $itm): ?>
+            <a href="<?= $this->router->to('adminSiteSettingEdit', ['group'=>$group->name,'item'=>$itm->id]) ?>" class="list-group-item list-group-item-action<?= ($itm->id == $active?' active':'') ?>" data-text="<?= hs($itm->name) ?>">
+                <div class="d-flex w-100 justify-content-between">
+                    <div class="list-group-item-label"><?= hs($itm->name) ?></div>
+                </div>
+                <small style="display:block" class="text-truncate">
+                    <?php if('' === $itm->value): ?>
+                        <em class="text-muted">empty</em>
+                    <?php else: ?>
+                        <?= hs($itm->value); ?>
+                    <?php endif; ?>
+                </small>
+            </a>
+        <?php endforeach; ?>
+    </div>
+</div>

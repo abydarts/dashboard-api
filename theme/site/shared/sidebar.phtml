@@ -1,0 +1,54 @@
+<div class="col-12 col-lg-4">
+    <?php if(isset($resume_league)) : ?>
+    <div class="mc-col">
+        <div class="league-table mc-table sidebar">
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <th colspan="2"><?= $resume_league->name ?></th>
+                    <th>P</th>
+                    <th>GD</th>
+                    <th>PTS</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach($resume_league->classement as $i => $team ):?>
+                    <tr>
+                        <td><?= $i+1 ?></td>
+                        <td><img loading="lazy" src="<?= $team->team->flag ?>" width="20px" height="100%" class="align-middle me-2"><?= !empty($team->team->nickname) ? $team->team->nickname:  $team->team->name ?></td>
+                        <td><?= $team->match_played ?? 0 ?></td>
+                        <td><?= $team->goal_difference ?? 0 ?></td>
+                        <td><?= $team->point ?? 0 ?></td>
+                    </tr>
+                <?php endforeach;?>
+                <tfoot>
+                <tr>
+                    <td colspan="5"><a href="<?= $this->router->to('siteLeagueSingle', ['id'=>$resume_league->id]) ?>" class="btn-arrow">more</a></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <?php endif;?>
+
+    <div class="mc-col">
+        <div class="league-table mc-table sidebar">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <td>Virtual Stadium</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <a href="<?=$this->router->to('siteVirtualStadium')?>">
+                            <img loading="lazy" style="max-width:100%" src="<?= $this->asset('/img/virtual-stadium.jpg') ?>" width="100%" height="100%">
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
